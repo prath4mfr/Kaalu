@@ -1,9 +1,7 @@
-/* ===== Global Layout with working background ===== */
+/* ===== Reset & Layout ===== */
 body {
   margin: 0;
   padding: 0;
-  background: url('brownheart.jpg') no-repeat center center fixed; /* or your brownheart.jpg */
-  background-size: cover;
   font-family: 'Arial', sans-serif;
   display: flex;
   justify-content: center;
@@ -11,26 +9,46 @@ body {
   min-height: 100vh;
 }
 
-/* ===== Shared Container Boxes ===== */
+/* ===== Backgrounds ===== */
+
+/* Login Page */
+body.login-page {
+  background: url('brownheart.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Home Page */
+body.home-page {
+  background: url('Hellokitty.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Other Pages (Slides, Gallery, Timeline, Gratitude) */
+body.other-page {
+  background: url('gradient.avif') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* ===== Shared Box Styles ===== */
 .password-box,
 .menu,
 .content-box {
-  background: rgba(210, 180, 140, 0.9); /* warm tan */
+  background: rgba(255, 182, 193, 0.8); /* light pinkish box for Hello Kitty vibe */
   padding: 40px;
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== Beautiful Heading for Home/Menu ===== */
+/* ===== Heading for Home/Menu ===== */
 .menu h1 {
-  font-family: 'Dancing Script', cursive; /* stylish font */
+  font-family: 'Dancing Script', cursive;
   font-size: 60px;
   color: #3B2F2F;
   margin-bottom: 20px;
 }
 
-/* ===== Menu Styling ===== */
+/* ===== Menu Links ===== */
 .menu ul {
   list-style: none;
   padding: 0;
@@ -42,21 +60,21 @@ body {
 
 .menu a {
   text-decoration: none;
-  color: #8B5E3C; /* warm chocolate brown */
+  color: #8B5E3C;
   font-size: 24px;
   font-weight: bold;
   transition: color 0.3s;
 }
 
 .menu a:hover {
-  color: #A0522D; /* lighter brown on hover */
+  color: #A0522D;
   text-decoration: underline;
 }
 
-/* ===== Form Elements for Password Box ===== */
+/* ===== Password Box Elements ===== */
 .password-box input {
-  background: #FFF8DC; /* light warm cream */
-  color: #3B2F2F; /* dark brown text */
+  background: #FFF8DC;
+  color: #3B2F2F;
   padding: 10px;
   border: none;
   border-radius: 10px;
@@ -66,15 +84,15 @@ body {
 .password-box button {
   padding: 10px 20px;
   border: none;
-  background: #8B5E3C; /* chocolate brown */
-  color: #FFF8DC; /* soft cream text */
+  background: #8B5E3C;
+  color: #FFF8DC;
   border-radius: 10px;
   cursor: pointer;
   transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .password-box button:hover {
-  background: #A0522D; /* lighter sienna brown on hover */
+  background: #A0522D;
   transform: scale(1.05);
 }
 
