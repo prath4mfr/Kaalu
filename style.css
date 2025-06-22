@@ -50,8 +50,8 @@ body {
 .password-box button {
   padding: 10px 20px;
   border: none;
-  background: #ff69b4;
-  color: white;
+  background: #8B5E3C; /* rich chocolate brown */
+  color: #FFF8DC; /* light cream text */
   border-radius: 10px;
   cursor: pointer;
 }
