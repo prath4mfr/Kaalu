@@ -1,46 +1,14 @@
-/* ===== Global Layout ===== */
+/* ===== Global Layout with working background ===== */
 body {
   margin: 0;
   padding: 0;
-  background: url('brownheart.jpg') no-repeat center center fixed; /* Fallback */
+  background: url('brownheart.jpg') no-repeat center center fixed; /* or your brownheart.jpg */
   background-size: cover;
   font-family: 'Arial', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-}
-
-/* ===== Different Backgrounds for Each Page ===== */
-
-/* Home page */
-body.home {
-  background: url('brownheart.jpg') no-repeat center center fixed;
-  background-size: cover;
-}
-
-/* Slides page */
-body.slides {
-  background: url('gradient.avif') no-repeat center center fixed;
-  background-size: cover;
-}
-
-/* Gallery page */
-body.gallery {
-  background: url('gradient.avif') no-repeat center center fixed;
-  background-size: cover;
-}
-
-/* Timeline page */
-body.timeline {
-  background: url('gradient.avif') no-repeat center center fixed;
-  background-size: cover;
-}
-
-/* Gratitude page */
-body.gratitude {
-  background: url('gradient.avif') no-repeat center center fixed;
-  background-size: cover;
 }
 
 /* ===== Shared Container Boxes ===== */
