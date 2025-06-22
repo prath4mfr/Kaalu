@@ -137,9 +137,9 @@ body.other-page .content-box {
 }
 /* ===== Logo Style ===== */
 .logo {
-  width: 120px;           /* adjust as needed */
+  width: 80px;      /* smaller, looks neat */
   height: auto;
   margin-bottom: 20px;
-  border-radius: 50%;     /* makes it a cute circle */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* optional soft shadow */
+  border-radius: 50%;  
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
