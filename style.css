@@ -96,3 +96,55 @@ body {
 .timeline li {
   margin: 15px 0;
 }
+/* Global background for all pages */
+body {
+  margin: 0;
+  padding: 0;
+  background: url('brownheart.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Menu container styling */
+.menu {
+  background: rgba(210, 180, 140, 0.9); /* Warm tan */
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+/* Beautiful heading */
+.menu h1 {
+  font-family: 'Dancing Script', cursive; /* Uses the Google Font you linked */
+  font-size: 60px;
+  color: #3B2F2F;
+  margin-bottom: 20px;
+}
+
+/* Menu list styling */
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  margin: 15px 0;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #8B5E3C; /* Warm brown */
+  font-size: 24px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.menu a:hover {
+  color: #A0522D; /* Lighter brown on hover */
+  text-decoration: underline;
+}
