@@ -13,7 +13,7 @@ body {
 
 /* Password box & content boxes */
 .password-box, .menu, .content-box {
-  background: rgba(255, 192, 203, 0.9);
+  background: rgba(210, 180, 140, 0.9); /* Tan/Brown with soft opacity */
   padding: 40px;
   border-radius: 20px;
   text-align: center;
@@ -39,6 +39,8 @@ body {
 
 /* Form elements */
 .password-box input {
+  background: #FFF8DC; /* a very light warm cream */
+  color: #3B2F2F; /* dark brown text */
   padding: 10px;
   border: none;
   border-radius: 10px;
