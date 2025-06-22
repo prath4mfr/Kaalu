@@ -135,3 +135,11 @@ body.other-page .content-box {
 .timeline li {
   margin: 15px 0;
 }
+/* ===== Logo Style ===== */
+.logo {
+  width: 120px;           /* adjust as needed */
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 50%;     /* makes it a cute circle */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* optional soft shadow */
+}
