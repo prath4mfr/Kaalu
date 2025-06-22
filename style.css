@@ -1,9 +1,7 @@
-/* Global background for all pages */
+/* ===== Global Layout ===== */
 body {
   margin: 0;
   padding: 0;
-  background: url('brownheart.jpg') no-repeat center center fixed;
-  background-size: cover;
   font-family: 'Arial', sans-serif;
   display: flex;
   justify-content: center;
@@ -11,16 +9,58 @@ body {
   min-height: 100vh;
 }
 
-/* Password box & content boxes */
-.password-box, .menu, .content-box {
-  background: rgba(210, 180, 140, 0.9); /* Tan/Brown with soft opacity */
+/* ===== Different Backgrounds for Each Page ===== */
+
+/* Home page */
+body.home-page {
+  background: url('brownheart.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Slides page */
+body.slides-page {
+  background: url('slides-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Gallery page */
+body.gallery-page {
+  background: url('gallery-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Timeline page */
+body.timeline-page {
+  background: url('timeline-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* Gratitude page */
+body.gratitude-page {
+  background: url('gratitude-bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* ===== Shared Container Boxes ===== */
+.password-box,
+.menu,
+.content-box {
+  background: rgba(210, 180, 140, 0.9); /* warm tan */
   padding: 40px;
   border-radius: 20px;
   text-align: center;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Menu styling */
+/* ===== Beautiful Heading for Home/Menu ===== */
+.menu h1 {
+  font-family: 'Dancing Script', cursive; /* stylish font */
+  font-size: 60px;
+  color: #3B2F2F;
+  margin-bottom: 20px;
+}
+
+/* ===== Menu Styling ===== */
 .menu ul {
   list-style: none;
   padding: 0;
@@ -32,19 +72,20 @@ body {
 
 .menu a {
   text-decoration: none;
-  color: #8B5E3C; /* warm chocolate brown, same as button */
-  font-size: 22px;
+  color: #8B5E3C; /* warm chocolate brown */
+  font-size: 24px;
   font-weight: bold;
-  transition: color 0.3s ease;
+  transition: color 0.3s;
 }
 
 .menu a:hover {
-  color: #A0522D; /* slightly lighter brown on hover */
+  color: #A0522D; /* lighter brown on hover */
+  text-decoration: underline;
 }
 
-/* Form elements */
+/* ===== Form Elements for Password Box ===== */
 .password-box input {
-  background: #FFF8DC; /* a very light warm cream */
+  background: #FFF8DC; /* light warm cream */
   color: #3B2F2F; /* dark brown text */
   padding: 10px;
   border: none;
@@ -55,7 +96,7 @@ body {
 .password-box button {
   padding: 10px 20px;
   border: none;
-  background: #8B5E3C; /* warm chocolate brown */
+  background: #8B5E3C; /* chocolate brown */
   color: #FFF8DC; /* soft cream text */
   border-radius: 10px;
   cursor: pointer;
@@ -64,7 +105,7 @@ body {
 
 .password-box button:hover {
   background: #A0522D; /* lighter sienna brown on hover */
-  transform: scale(1.05); /* slight zoom effect */
+  transform: scale(1.05);
 }
 
 #error {
@@ -72,7 +113,7 @@ body {
   margin-top: 10px;
 }
 
-/* Gallery */
+/* ===== Gallery ===== */
 .gallery {
   display: flex;
   flex-wrap: wrap;
@@ -83,10 +124,10 @@ body {
 .gallery img {
   width: 200px;
   border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Timeline */
+/* ===== Timeline ===== */
 .timeline {
   text-align: left;
   max-width: 600px;
@@ -95,56 +136,4 @@ body {
 
 .timeline li {
   margin: 15px 0;
-}
-/* Global background for all pages */
-body {
-  margin: 0;
-  padding: 0;
-  background: url('brownheart.jpg') no-repeat center center fixed;
-  background-size: cover;
-  font-family: 'Arial', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-}
-
-/* Menu container styling */
-.menu {
-  background: rgba(210, 180, 140, 0.9); /* Warm tan */
-  padding: 40px;
-  border-radius: 20px;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-}
-
-/* Beautiful heading */
-.menu h1 {
-  font-family: 'Dancing Script', cursive; /* Uses the Google Font you linked */
-  font-size: 60px;
-  color: #3B2F2F;
-  margin-bottom: 20px;
-}
-
-/* Menu list styling */
-.menu ul {
-  list-style: none;
-  padding: 0;
-}
-
-.menu li {
-  margin: 15px 0;
-}
-
-.menu a {
-  text-decoration: none;
-  color: #8B5E3C; /* Warm brown */
-  font-size: 24px;
-  font-weight: bold;
-  transition: color 0.3s;
-}
-
-.menu a:hover {
-  color: #A0522D; /* Lighter brown on hover */
-  text-decoration: underline;
 }
