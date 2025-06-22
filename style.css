@@ -1,0 +1,85 @@
+/* Global background for all pages */
+body {
+  margin: 0;
+  padding: 0;
+  background: url('images/your_background.gif') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Password box & content boxes */
+.password-box, .menu, .content-box {
+  background: rgba(255, 192, 203, 0.9);
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+/* Menu styling */
+.menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  margin: 15px 0;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #ff1493;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Form elements */
+.password-box input {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  margin: 10px 0;
+}
+
+.password-box button {
+  padding: 10px 20px;
+  border: none;
+  background: #ff69b4;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#error {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Gallery */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.gallery img {
+  width: 200px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Timeline */
+.timeline {
+  text-align: left;
+  max-width: 600px;
+  margin: auto;
+}
+
+.timeline li {
+  margin: 15px 0;
+}
