@@ -32,9 +32,14 @@ body {
 
 .menu a {
   text-decoration: none;
-  color: #ff1493;
+  color: #8B5E3C; /* warm chocolate brown, same as button */
   font-size: 22px;
   font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.menu a:hover {
+  color: #A0522D; /* slightly lighter brown on hover */
 }
 
 /* Form elements */
