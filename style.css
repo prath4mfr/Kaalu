@@ -29,25 +29,33 @@ body.other-page {
   background-size: cover;
 }
 
-/* ===== Box Styles ===== */
+/* ===== Boxes ===== */
 
-/* Brown box ONLY for Login Page */
-body.login-page .password-box {
-  background: rgba(210, 180, 140, 0.9); /* Brownish tan */
+/* Common style for all boxes */
+.menu,
+.content-box {
+  background: rgba(255, 182, 193, 0.8); /* pinkish for Home & Other pages */
   padding: 40px;
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Pink boxes for Home Page & Other Pages */
-body.home-page .menu,
-body.other-page .content-box {
-  background: rgba(255, 182, 193, 0.8); /* Light pink */
+/* Password box has special brown background */
+.password-box {
+  background: rgba(210, 180, 140, 0.9); /* warm brown */
   padding: 40px;
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== Logo Styling ===== */
+.logo {
+  width: 80px;
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 50%;
 }
 
 /* ===== Home/Menu Heading ===== */
@@ -81,7 +89,7 @@ body.other-page .content-box {
   text-decoration: underline;
 }
 
-/* ===== Password Box Input & Button ===== */
+/* ===== Password Box Inputs & Button ===== */
 .password-box input {
   background: #FFF8DC;
   color: #3B2F2F;
@@ -134,12 +142,4 @@ body.other-page .content-box {
 
 .timeline li {
   margin: 15px 0;
-}
-/* ===== Logo Style ===== */
-.logo {
-  width: 80px;      /* smaller, looks neat */
-  height: auto;
-  margin-bottom: 20px;
-  border-radius: 50%;  
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
