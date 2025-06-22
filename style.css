@@ -50,10 +50,16 @@ body {
 .password-box button {
   padding: 10px 20px;
   border: none;
-  background: #8B5E3C; /* rich chocolate brown */
-  color: #FFF8DC; /* light cream text */
+  background: #8B5E3C; /* warm chocolate brown */
+  color: #FFF8DC; /* soft cream text */
   border-radius: 10px;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.password-box button:hover {
+  background: #A0522D; /* lighter sienna brown on hover */
+  transform: scale(1.05); /* slight zoom effect */
 }
 
 #error {
