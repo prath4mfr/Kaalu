@@ -56,6 +56,14 @@ body.other-page {
   height: auto;
   margin-bottom: 20px;
   border-radius: 50%;
+} 
+
+/* ===== Header container for logo + title ===== */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
 /* ===== Home/Menu Heading ===== */
