@@ -65,9 +65,10 @@ body.other-page {
 .menu h1 {
   font-family: 'Dancing Script', cursive;
   font-size: 60px;
-  color: #3B2F2F; /* default brown */
+  color: #8B0000; /* Dark Red */
   margin-bottom: 20px;
 }
+
 
 /* === Override heading color ONLY on Home page === */
 body.home-page .menu h1 {
