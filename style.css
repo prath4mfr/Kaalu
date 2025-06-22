@@ -23,17 +23,27 @@ body.home-page {
   background-size: cover;
 }
 
-/* Other Pages */
+/* Other Pages (Slides, Gallery, Timeline, Gratitude) */
 body.other-page {
   background: url('gradient.avif') no-repeat center center fixed;
   background-size: cover;
 }
 
-/* ===== Shared Boxes ===== */
-.password-box,
-.menu,
-.content-box {
-  background: rgba(255, 182, 193, 0.8);
+/* ===== Box Styles ===== */
+
+/* Brown box ONLY for Login Page */
+body.login-page .password-box {
+  background: rgba(210, 180, 140, 0.9); /* Brownish tan */
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Pink boxes for Home Page & Other Pages */
+body.home-page .menu,
+body.other-page .content-box {
+  background: rgba(255, 182, 193, 0.8); /* Light pink */
   padding: 40px;
   border-radius: 20px;
   text-align: center;
@@ -71,10 +81,57 @@ body.other-page {
   text-decoration: underline;
 }
 
-/* ===== Password Box ===== */
+/* ===== Password Box Input & Button ===== */
 .password-box input {
   background: #FFF8DC;
   color: #3B2F2F;
   padding: 10px;
   border: none;
   border-radius: 10px;
+  margin: 10px 0;
+}
+
+.password-box button {
+  padding: 10px 20px;
+  border: none;
+  background: #8B5E3C;
+  color: #FFF8DC;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.password-box button:hover {
+  background: #A0522D;
+  transform: scale(1.05);
+}
+
+#error {
+  color: red;
+  margin-top: 10px;
+}
+
+/* ===== Gallery ===== */
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.gallery img {
+  width: 200px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Timeline ===== */
+.timeline {
+  text-align: left;
+  max-width: 600px;
+  margin: auto;
+}
+
+.timeline li {
+  margin: 15px 0;
+}
