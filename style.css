@@ -14,31 +14,31 @@ body {
 /* ===== Different Backgrounds for Each Page ===== */
 
 /* Home page */
-body.home-page {
+body.home {
   background: url('brownheart.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
 /* Slides page */
-body.slides-page {
+body.slides {
   background: url('gradient.avif') no-repeat center center fixed;
   background-size: cover;
 }
 
 /* Gallery page */
-body.gallery-page {
+body.gallery {
   background: url('gradient.avif') no-repeat center center fixed;
   background-size: cover;
 }
 
 /* Timeline page */
-body.timeline-page {
+body.timeline {
   background: url('gradient.avif') no-repeat center center fixed;
   background-size: cover;
 }
 
 /* Gratitude page */
-body.gratitude-page {
+body.gratitude {
   background: url('gradient.avif') no-repeat center center fixed;
   background-size: cover;
 }
