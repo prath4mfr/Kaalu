@@ -13,31 +13,31 @@ body {
 
 /* Home page */
 body.home-page {
-  background: url('brownheart.jpg') no-repeat center center fixed;
+  background: url('Hellokitty.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
 /* Slides page */
 body.slides-page {
-  background: url('slides-bg.jpg') no-repeat center center fixed;
+  background: url('gradient.avif') no-repeat center center fixed;
   background-size: cover;
 }
 
 /* Gallery page */
 body.gallery-page {
-  background: url('gallery-bg.jpg') no-repeat center center fixed;
+  background: url('gradient.avif') no-repeat center center fixed;
   background-size: cover;
 }
 
 /* Timeline page */
 body.timeline-page {
-  background: url('timeline-bg.jpg') no-repeat center center fixed;
+  background: url('gradient.avif') no-repeat center center fixed;
   background-size: cover;
 }
 
 /* Gratitude page */
 body.gratitude-page {
-  background: url('gratitude-bg.jpg') no-repeat center center fixed;
+  background: url('gradient.avif') no-repeat center center fixed;
   background-size: cover;
 }
 
