@@ -23,7 +23,7 @@ body.home-page {
   background-size: cover;
 }
 
-/* Other Pages */
+/* Other Pages (Slides, Gallery, Timeline, Gratitude) */
 body.other-page {
   background: url('gradient.avif') no-repeat center center fixed;
   background-size: cover;
@@ -31,17 +31,17 @@ body.other-page {
 
 /* ===== Boxes ===== */
 
-/* Home + Other pages = Pinkish */
+/* Common style for Home & Other pages */
 .menu,
 .content-box {
-  background: rgba(255, 182, 193, 0.8); /* light pink */
+  background: rgba(255, 182, 193, 0.8); /* pinkish for Home & Other pages */
   padding: 40px;
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Login = Brownish */
+/* Password box has special brown background */
 .password-box {
   background: rgba(210, 180, 140, 0.9); /* warm brown */
   padding: 40px;
@@ -50,26 +50,28 @@ body.other-page {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== Logo + Heading Styling ===== */
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* ===== Logo Styling ===== */
+.logo {
+  width: 70px;  /* smaller for better balance */
+  height: auto;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== Home/Menu Heading ===== */
+.menu h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 60px;
+  color: #3B2F2F; /* default brown */
   margin-bottom: 20px;
 }
 
-.logo {
-  width: 60px; /* good size */
-  height: auto;
-  margin: 0;
-  border-radius: 50%;
-}
-
-.menu h1 {
-  font-family: 'Dancing Script', cursive;
-  font-size: 50px;
-  color: #3B2F2F;
-  margin: 10px 0 0 0; /* tight top margin, no bottom */
+/* === Override heading color ONLY on Home page === */
+body.home-page .menu h1 {
+  color: red;
 }
 
 /* ===== Menu Links ===== */
@@ -84,7 +86,7 @@ body.other-page {
 
 .menu a {
   text-decoration: none;
-  color: #8B5E3C;
+  color: #8B5E3C; /* default brown */
   font-size: 24px;
   font-weight: bold;
   transition: color 0.3s;
@@ -93,6 +95,15 @@ body.other-page {
 .menu a:hover {
   color: #A0522D;
   text-decoration: underline;
+}
+
+/* === Override menu links ONLY on Home page === */
+body.home-page .menu a {
+  color: black;
+}
+
+body.home-page .menu a:hover {
+  color: red; /* optional: hover red for Home page links */
 }
 
 /* ===== Password Box Inputs & Button ===== */
