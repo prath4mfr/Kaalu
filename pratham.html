@@ -32,50 +32,54 @@
   <audio id="bgSound" src="COMEAROUND.mp3" autoplay loop></audio>
 
   <script>
-    // If the browser blocks autoplay with sound, force it on interaction
+    // Attempt to play immediately
     window.addEventListener('load', () => {
       const bgSound = document.getElementById('bgSound');
       bgSound.play().catch(() => {
-        // fallback: play on click
         document.body.addEventListener('click', () => bgSound.play());
       });
     });
 
     const videoIDs = [
-      "vwD0ewU0uZ8",
-      "kBFDaYf8GpU",
-      "-u7YErDZmxw",
-      "3V68zWvvJ6E",
-      "OADWgHqF8sw",
-      "a1UAkV1vs4Y",
-      "RhN07X4hcK4",
-      "Ka1QybRGkGo",
-      "O2jkV4BsN6U",
-      "NiqzAybAlqM",
-      "a24EUd0zeqI",
-      "xPjq75pbewI",
-      "1e0yw3kP0F4",
-      "tyWJ5MLzT7s",
-      "yCCTHUW392g",
-      "J_qvG5ODGHk",
-      "TFWXqLSr4ZM",
-      "6tI-0LBamGg",
-      "pe62zVIc4X0",
-      "Pi-OvAfQD8M",
-      "M1t3tcqvu0s",
-      "tVRTm2khwTM",
-      "_9hkXCYiEjc",
-      "FRnWtzoVR9o",
-      "Z73PBkRBMFA",
-      "XxORUYxVvVg",
-      "fXF59UWr-tA"
+      "vwD0ewU0uZ8","kBFDaYf8GpU","-u7YErDZmxw","3V68zWvvJ6E",
+      "OADWgHqF8sw","a1UAkV1vs4Y","RhN07X4hcK4","Ka1QybRGkGo",
+      "O2jkV4BsN6U","NiqzAybAlqM","a24EUd0zeqI","xPjq75pbewI",
+      "1e0yw3kP0F4","tyWJ5MLzT7s","yCCTHUW392g","J_qvG5ODGHk",
+      "TFWXqLSr4ZM","6tI-0LBamGg","pe62zVIc4X0","Pi-OvAfQD8M",
+      "M1t3tcqvu0s","tVRTm2khwTM","_9hkXCYiEjc","FRnWtzoVR9o",
+      "Z73PBkRBMFA","XxORUYxVvVg","fXF59UWr-tA"
     ];
+
+    const placed = [];
 
     videoIDs.forEach(id => {
       const iframe = document.createElement('iframe');
       iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}`;
-      iframe.style.left = Math.random() * (window.innerWidth - 320) + 'px';
-      iframe.style.top = Math.random() * (window.innerHeight - 200) + 'px';
+
+      let tries = 0;
+      let overlap = true;
+      let x, y;
+
+      while (overlap && tries < 100) {
+        overlap = false;
+        x = Math.random() * (window.innerWidth - 320);
+        y = Math.random() * (window.innerHeight - 200);
+
+        for (const pos of placed) {
+          const dx = pos.x - x;
+          const dy = pos.y - y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 250) {
+            overlap = true;
+            break;
+          }
+        }
+        tries++;
+      }
+
+      placed.push({x, y});
+      iframe.style.left = x + 'px';
+      iframe.style.top = y + 'px';
       document.body.appendChild(iframe);
     });
   </script>
