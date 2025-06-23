@@ -9,7 +9,7 @@
       padding: 0;
       background: url('scrap.png') no-repeat center center fixed;
       background-size: cover;
-      font-family: 'Patrick Hand', cursive; /* instead of Dancing Script */
+      font-family: 'Patrick Hand', cursive;
       overflow-x: hidden;
     }
 
@@ -20,24 +20,24 @@
       margin-top: 30px;
     }
 
-.timeline {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 30px;
-  background: #fefefe; /* solid paper white */
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-  line-height: 1.6;
-}
+    .timeline {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      background: #fefefe;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      line-height: 1.6;
+    }
 
-.timeline-item {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 1s ease;
-  margin: 20px 0;
-  color: #333; /* warm dark text for readability */
-  font-size: 18px; /* slightly larger for clarity */
-}
+    .timeline-item {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+      margin: 20px 0;
+      color: #333;
+      font-size: 18px;
+    }
 
     .timeline-item.visible {
       opacity: 1;
@@ -73,6 +73,29 @@
       font-weight: bold;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
+
+    /* NEW: Scroll Down Indicator */
+    #scrollDown {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 24px;
+      color: #fff;
+      text-shadow: 2px 2px 5px #000;
+      animation: bounce 2s infinite;
+      transition: opacity 0.5s ease;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -10px); }
+    }
+
+    #scrollDown.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -104,6 +127,9 @@
   <audio id="bgMusic" src="bounce.mp3" loop></audio>
   <button id="musicControl">Play Music 🎵</button>
 
+  <!-- NEW: Scroll Down Indicator -->
+  <div id="scrollDown">⬇️ Scroll Down ⬇️</div>
+
   <script>
     // Scroll reveal
     const items = document.querySelectorAll('.timeline-item');
@@ -115,6 +141,14 @@
           item.classList.add('visible');
         }
       });
+
+      // Hide scroll down indicator after scrolling down
+      const scrollDown = document.getElementById('scrollDown');
+      if (window.scrollY > 50) {
+        scrollDown.classList.add('hidden');
+      } else {
+        scrollDown.classList.remove('hidden');
+      }
     });
 
     // Background music controls
