@@ -37,6 +37,55 @@
       transition: transform 0.1s;
     }
 
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #startGame {
+      background: #00CED1;
+    }
+    #startGame:hover {
+      background: #20B2AA;
+    }
+
+    #restartGame {
+      background: #9370DB;
+    }
+    #restartGame:hover {
+      background: #7B68EE;
+    }
+
+    #saveScore {
+      background: #FF69B4;
+      color: white;
+    }
+
+    #saveScore:hover {
+      background: #FF1493;
+    }
+
+    #showLeaderboard {
+      background: #FFD700;
+    }
+
+    #showLeaderboard:hover {
+      background: #FFC300;
+    }
+
+    #closeLeaderboard {
+      background: #ddd;
+    }
+
+    #closeLeaderboard:hover {
+      background: #bbb;
+    }
+
     #leaderboard {
       display: none;
       position: absolute;
@@ -72,46 +121,13 @@
       margin: 10px 0;
       box-sizing: border-box;
     }
-
-    button {
-      padding: 10px 20px;
-      margin: 5px;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    #saveScore {
-      background: #FF69B4;
-      color: white;
-    }
-
-    #saveScore:hover {
-      background: #FF1493;
-    }
-
-    #showLeaderboard {
-      background: #FFD700;
-    }
-
-    #showLeaderboard:hover {
-      background: #FFC300;
-    }
-
-    #closeLeaderboard {
-      background: #ddd;
-    }
-
-    #closeLeaderboard:hover {
-      background: #bbb;
-    }
   </style>
 </head>
 <body>
   <h1>Catch the Character 🐾</h1>
   <div id="score">Score: 0</div>
+  <button id="startGame">Start Game</button>
+  <button id="restartGame" style="display: none;">Restart</button>
   <img id="character" src="hello.png" alt="Character">
 
   <button id="showLeaderboard">🏆 Show Leaderboard</button>
@@ -133,8 +149,11 @@
     const leaderboardDiv = document.getElementById('leaderboard');
     const showLeaderboardBtn = document.getElementById('showLeaderboard');
     const closeLeaderboardBtn = document.getElementById('closeLeaderboard');
+    const startBtn = document.getElementById('startGame');
+    const restartBtn = document.getElementById('restartGame');
 
     let score = 0;
+    let gameRunning = false;
 
     function moveCharacter() {
       const maxX = window.innerWidth - character.clientWidth;
@@ -146,7 +165,24 @@
     }
 
     character.addEventListener('click', () => {
+      if (!gameRunning) return;
       score++;
+      scoreDisplay.textContent = `Score: ${score}`;
+      moveCharacter();
+    });
+
+    startBtn.addEventListener('click', () => {
+      gameRunning = true;
+      score = 0;
+      scoreDisplay.textContent = `Score: ${score}`;
+      startBtn.style.display = 'none';
+      restartBtn.style.display = 'inline-block';
+      moveCharacter();
+    });
+
+    restartBtn.addEventListener('click', () => {
+      gameRunning = true;
+      score = 0;
       scoreDisplay.textContent = `Score: ${score}`;
       moveCharacter();
     });
@@ -183,7 +219,6 @@
       leaderboardDiv.style.display = 'none';
     });
 
-    moveCharacter();
     loadLeaderboard();
   </script>
 </body>
