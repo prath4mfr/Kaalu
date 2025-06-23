@@ -5,39 +5,36 @@
   <title>Music Page</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="music-page">
-  <h1>Enjoy the Music!</h1>
+<body class="other-page"> <!-- ✅ match your style -->
+  <div class="content-box"> <!-- ✅ pretty container -->
+    <h1>Enjoy the Music!</h1>
 
-  <!-- Actual music player -->
-  <audio id="myMusic" controls>
-    <source src="Mr.pratham.wav" type="audio/wav">
-    Your browser does not support the audio element.
-  </audio>
+    <!-- Actual music player -->
+    <audio id="myMusic" controls>
+      <source src="Mr.pratham.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
 
   <script>
     const audio = document.getElementById('myMusic');
     let dropInterval = null;
 
-    // Function to create a falling GIF
     function createDrop() {
       const drop = document.createElement('img');
-      drop.src = 'dawg.gif'; // ✅ your GIF here!
+      drop.src = 'dawg.gif';
       drop.classList.add('falling-gif');
       drop.style.left = Math.random() * window.innerWidth + 'px';
       document.body.appendChild(drop);
-
-      // Remove after animation
       setTimeout(() => drop.remove(), 4000);
     }
 
-    // When music plays -> start dropping
     audio.addEventListener('play', () => {
       if (!dropInterval) {
         dropInterval = setInterval(createDrop, 400);
       }
     });
 
-    // When music pauses -> stop dropping
     audio.addEventListener('pause', () => {
       clearInterval(dropInterval);
       dropInterval = null;
