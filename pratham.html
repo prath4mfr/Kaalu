@@ -2,23 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pratham's Page</title>
+  <title>Pratham's Chaos</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       overflow: hidden;
       background: black;
+      animation: flash 0.2s infinite;
     }
 
-    /* Flashing background */
     @keyframes flash {
       0% { background: black; }
       50% { background: white; }
       100% { background: black; }
-    }
-    body {
-      animation: flash 0.5s infinite;
     }
 
     iframe {
@@ -31,31 +28,45 @@
   </style>
 </head>
 <body>
-  <!-- Background Music -->
+  <!-- Background music playing on loop with no controls -->
   <audio src="COMEAROUND.mp3" autoplay loop></audio>
 
   <script>
-    // List of YouTube embed links
     const videoLinks = [
-      "https://www.youtube.com/embed/vwD0ewU0uZ8",
-      "https://www.youtube.com/embed/kBFDaYf8GpU",
-      "https://www.youtube.com/embed/-u7YErDZmxw",
-      "https://www.youtube.com/embed/3V68zWvvJ6E",
-      "https://www.youtube.com/embed/OADWgHqF8sw",
-      "https://www.youtube.com/embed/a1UAkV1vs4Y",
-      "https://www.youtube.com/embed/RhN07X4hcK4",
-      "https://www.youtube.com/embed/Ka1QybRGkGo",
-      "https://www.youtube.com/embed/O2jkV4BsN6U",
-      "https://www.youtube.com/embed/NiqzAybAlqM",
-      "https://www.youtube.com/embed/a24EUd0zeqI"
+      "https://www.youtube.com/embed/vwD0ewU0uZ8?autoplay=1&loop=1&playlist=vwD0ewU0uZ8",
+      "https://www.youtube.com/embed/kBFDaYf8GpU?autoplay=1&loop=1&playlist=kBFDaYf8GpU",
+      "https://www.youtube.com/embed/-u7YErDZmxw?autoplay=1&loop=1&playlist=-u7YErDZmxw",
+      "https://www.youtube.com/embed/3V68zWvvJ6E?autoplay=1&loop=1&playlist=3V68zWvvJ6E",
+      "https://www.youtube.com/embed/OADWgHqF8sw?autoplay=1&loop=1&playlist=OADWgHqF8sw",
+      "https://www.youtube.com/embed/a1UAkV1vs4Y?autoplay=1&loop=1&playlist=a1UAkV1vs4Y",
+      "https://www.youtube.com/embed/RhN07X4hcK4?autoplay=1&loop=1&playlist=RhN07X4hcK4",
+      "https://www.youtube.com/embed/Ka1QybRGkGo?autoplay=1&loop=1&playlist=Ka1QybRGkGo",
+      "https://www.youtube.com/embed/O2jkV4BsN6U?autoplay=1&loop=1&playlist=O2jkV4BsN6U",
+      "https://www.youtube.com/embed/NiqzAybAlqM?autoplay=1&loop=1&playlist=NiqzAybAlqM",
+      "https://www.youtube.com/embed/a24EUd0zeqI?autoplay=1&loop=1&playlist=a24EUd0zeqI",
+      "https://www.youtube.com/embed/xPjq75pbewI?autoplay=1&loop=1&playlist=xPjq75pbewI",
+      "https://www.youtube.com/embed/1e0yw3kP0F4?autoplay=1&loop=1&playlist=1e0yw3kP0F4",
+      "https://www.youtube.com/embed/tyWJ5MLzT7s?autoplay=1&loop=1&playlist=tyWJ5MLzT7s",
+      "https://www.youtube.com/embed/yCCTHUW392g?autoplay=1&loop=1&playlist=yCCTHUW392g",
+      "https://www.youtube.com/embed/J_qvG5ODGHk?autoplay=1&loop=1&playlist=J_qvG5ODGHk",
+      "https://www.youtube.com/embed/TFWXqLSr4ZM?autoplay=1&loop=1&playlist=TFWXqLSr4ZM",
+      "https://www.youtube.com/embed/6tI-0LBamGg?autoplay=1&loop=1&playlist=6tI-0LBamGg",
+      "https://www.youtube.com/embed/pe62zVIc4X0?autoplay=1&loop=1&playlist=pe62zVIc4X0",
+      "https://www.youtube.com/embed/Pi-OvAfQD8M?autoplay=1&loop=1&playlist=Pi-OvAfQD8M",
+      "https://www.youtube.com/embed/M1t3tcqvu0s?autoplay=1&loop=1&playlist=M1t3tcqvu0s",
+      "https://www.youtube.com/embed/tVRTm2khwTM?autoplay=1&loop=1&playlist=tVRTm2khwTM",
+      "https://www.youtube.com/embed/_9hkXCYiEjc?autoplay=1&loop=1&playlist=_9hkXCYiEjc",
+      "https://www.youtube.com/embed/FRnWtzoVR9o?autoplay=1&loop=1&playlist=FRnWtzoVR9o",
+      "https://www.youtube.com/embed/Z73PBkRBMFA?autoplay=1&loop=1&playlist=Z73PBkRBMFA",
+      "https://www.youtube.com/embed/XxORUYxVvVg?autoplay=1&loop=1&playlist=XxORUYxVvVg",
+      "https://www.youtube.com/embed/fXF59UWr-tA?autoplay=1&loop=1&playlist=fXF59UWr-tA"
     ];
 
-    // For each video, create an iframe at a random position
     videoLinks.forEach(link => {
       const iframe = document.createElement('iframe');
-      iframe.src = link + '?autoplay=1&mute=1'; // autoplay + muted for auto play policy
-      iframe.style.top = Math.random() * (window.innerHeight - 200) + 'px';
+      iframe.src = link;
       iframe.style.left = Math.random() * (window.innerWidth - 320) + 'px';
+      iframe.style.top = Math.random() * (window.innerHeight - 200) + 'px';
       document.body.appendChild(iframe);
     });
   </script>
