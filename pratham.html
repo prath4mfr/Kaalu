@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pratham</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+    }
+    body {
+      animation: flash 0.2s infinite alternate;
+      position: relative;
+    }
+    @keyframes flash {
+      0% { background: black; }
+      100% { background: white; }
+    }
+    a {
+      position: absolute;
+      color: red;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      animation: float 5s infinite alternate;
+    }
+    @keyframes float {
+      from { transform: translateY(0px); }
+      to { transform: translateY(20px); }
+    }
+  </style>
+</head>
+<body>
+
+  <audio autoplay loop>
+    <source src="COMEAROUND.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const links = [
+      'https://youtu.be/vwD0ewU0uZ8',
+      'https://youtu.be/kBFDaYf8GpU',
+      'https://youtu.be/-u7YErDZmxw',
+      'https://youtu.be/3V68zWvvJ6E',
+      'https://youtu.be/OADWgHqF8sw',
+      'https://youtu.be/a1UAkV1vs4Y',
+      'https://youtu.be/RhN07X4hcK4',
+      'https://youtu.be/Ka1QybRGkGo',
+      'https://youtu.be/O2jkV4BsN6U',
+      'https://youtu.be/NiqzAybAlqM',
+      'https://youtu.be/a24EUd0zeqI'
+    ];
+
+    links.forEach(link => {
+      const a = document.createElement('a');
+      a.href = link;
+      a.target = '_blank';
+      a.textContent = 'VIDEO';
+      a.style.left = Math.random() * window.innerWidth + 'px';
+      a.style.top = Math.random() * window.innerHeight + 'px';
+      document.body.appendChild(a);
+    });
+  </script>
+
+</body>
+</html>
