@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Feedback Chat</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('back.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      color: #fff;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px #000;
+    }
+
+    .feedback-container {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      width: 90%;
+    }
+
+    textarea {
+      width: 100%;
+      height: 250px;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 16px;
+      resize: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>Shared Feedback Chat</h1>
+  <div class="feedback-container">
+    <textarea id="sharedChat" placeholder="Type here..."></textarea>
+  </div>
+
+  <script>
+    const chatBox = document.getElementById('sharedChat');
+
+    // Load saved chat
+    chatBox.value = localStorage.getItem('sharedChat') || '';
+
+    // Save on input
+    chatBox.addEventListener('input', () => {
+      localStorage.setItem('sharedChat', chatBox.value);
+    });
+
+    // Keep syncing in case multiple tabs
+    setInterval(() => {
+      const latest = localStorage.getItem('sharedChat') || '';
+      if (chatBox.value !== latest) {
+        chatBox.value = latest;
+      }
+    }, 500);
+  </script>
+</body>
+</html>
