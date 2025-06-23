@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Music Page</title>
+  <title>Music Player</title>
   <style>
     body {
       margin: 0;
@@ -10,59 +10,38 @@
       background: url('gradient.avif') no-repeat center center fixed;
       background-size: cover;
       height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       cursor: url('cursor.png'), auto;
-      overflow: hidden; /* avoid scrollbars */
     }
 
-    #musicControl {
-      position: absolute;
-      padding: 15px 30px;
-      font-size: 20px;
-      background: pink;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      transition: background 0.3s ease;
+    .player-box {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      text-align: center;
     }
 
-    #musicControl:hover {
-      background: hotpink;
-      color: white;
+    audio {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    h1 {
+      color: darkred;
+      font-family: 'Arial', sans-serif;
     }
   </style>
 </head>
 <body>
-  <button id="musicControl">Play Music</button>
-
-  <audio id="bgMusic" loop>
-    <source src="Mr.pratham.wav" type="audio/wav">
-    Your browser does not support the audio element.
-  </audio>
-
-  <script>
-    // ✅ Random position for the button
-    const button = document.getElementById('musicControl');
-    window.onload = () => {
-      const maxX = window.innerWidth - button.offsetWidth;
-      const maxY = window.innerHeight - button.offsetHeight;
-      const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
-      button.style.left = `${randomX}px`;
-      button.style.top = `${randomY}px`;
-    };
-
-    // ✅ Play/Pause music logic
-    const music = document.getElementById('bgMusic');
-    button.addEventListener('click', () => {
-      if (music.paused) {
-        music.play();
-        button.textContent = 'Pause Music';
-      } else {
-        music.pause();
-        button.textContent = 'Play Music';
-      }
-    });
-  </script>
+  <div class="player-box">
+    <h1>🎵 Mr.Pratham</h1>
+    <audio controls>
+      <source src="Mr.pratham.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
 </body>
 </html>
