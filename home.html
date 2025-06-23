@@ -26,21 +26,21 @@
 
   <!-- ✅ Animated Hearts Script -->
   <script>
-    // Function to create a heart at random x position
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * window.innerWidth + 'px';
-      document.body.appendChild(heart);
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
 
-      // Remove the heart after animation finishes
-      setTimeout(() => {
-        heart.remove();
-      }, 2000); // must match animation duration in CSS
-    }
+    // Random horizontal position within the viewport width
+    heart.style.left = Math.random() * window.innerWidth + 'px';
 
-    // Create a new heart every 300 ms
-    setInterval(createHeart, 300);
+    document.body.appendChild(heart);
+
+    // Remove after animation
+    setTimeout(() => {
+      heart.remove();
+    }, 4000); // matches the 4s animation duration
+  }
+
+  // Create a new heart every 300ms
+  setInterval(createHeart, 300);
   </script>
-</body>
-</html>
