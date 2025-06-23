@@ -127,10 +127,12 @@ body.other-page {
 }
 
 .blue-link {
-  background-color: #3498db; /* a nice blue */
-  top: 35%;
-  left: 25%;
+  color: #3498db;
+  background: rgba(52, 152, 219, 0.3);
+  top: 45%;
+  left: 10%;
 }
+
 /* ===== Password Box Inputs & Button ===== */
 .password-box input {
   background: #FFF8DC;
