@@ -127,10 +127,8 @@ body.other-page {
 }
 
 .blue-link {
-  color: #3498db;
-  background: rgba(52, 152, 219, 0.3);
-  top: 45%;
-  left: 10%;
+  color: #3498db;             /* blue text */
+  background: rgba(52, 152, 219, 0.3); /* semi-transparent pastel blue bubble */
 }
 
 /* ===== Password Box Inputs & Button ===== */
