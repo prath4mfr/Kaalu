@@ -1,4 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Home</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 <body class="home-page">
+
+  <!-- Menu and heading -->
   <div class="menu">
     <img src="logo.jpg.webp" class="logo" alt="Logo">
     <h1>Welcome, Milku!</h1>
@@ -15,16 +24,16 @@
     <img src="kuromi.png" alt="Secret Kuromi">
   </a>
 
-  <!-- Play/Pause Music Button -->
+  <!-- ✅ Music Control Button -->
   <button id="musicControl" class="music-control">Play Music</button>
 
-  <!-- Background Music (using your file name) -->
+  <!-- ✅ Background Music -->
   <audio id="bgMusic" loop>
     <source src="Dreamland.mp3" type="audio/mp4">
     Your browser does not support the audio element.
   </audio>
 
-  <!-- Hearts + Music Script -->
+  <!-- ✅ Scripts for hearts + music -->
   <script>
     // Floating Hearts
     function createHeart() {
@@ -42,7 +51,9 @@
 
     control.addEventListener('click', () => {
       if (music.paused) {
-        music.play();
+        music.play().catch(error => {
+          console.log("Playback prevented by browser:", error);
+        });
         control.textContent = 'Pause Music';
       } else {
         music.pause();
@@ -50,4 +61,6 @@
       }
     });
   </script>
+
 </body>
+</html>
