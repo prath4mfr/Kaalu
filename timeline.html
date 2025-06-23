@@ -1,31 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Events Timeline</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <title>Our Magical Timeline ✨</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('scrap.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Dancing Script', cursive;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      color: #fff;
+      text-shadow: 2px 2px 8px #000;
+      margin-top: 30px;
+    }
+
+    .timeline {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    .timeline-item {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+      margin: 20px 0;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .floating-sticker {
+      position: fixed;
+      width: 60px;
+      height: 60px;
+      pointer-events: none;
+      animation: floatAround 20s linear infinite;
+      z-index: 10;
+    }
+
+    @keyframes floatAround {
+      0% { top: 10%; left: 5%; }
+      25% { top: 30%; left: 80%; }
+      50% { top: 60%; left: 50%; }
+      75% { top: 80%; left: 10%; }
+      100% { top: 10%; left: 5%; }
+    }
+
+    #musicControl {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #fff;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+  </style>
 </head>
-<body class="other-page">
-  <div class="content-box">
-    <h1>Events Timeline 📅</h1>
-    <ul class="timeline">
-      <li><strong>9th Grade (2022):</strong> our friendship started in 9th i once asked Saumya why she always wore a mask and ig that started everything.At that time She was friends with Rhythm, Sanya, and Sumehra.</li>
-      <li><strong>First iconic Incident 🤪:</strong> She once asked me to draw a drawing for her but I said *“Khud banale”*</li>
-      <li><strong>Late 9th:</strong> Slowly, I started approaching her more, got her Snapchat and after lots of convincing, her Instagram too.</li>
-      <li><strong>10th Grade (2023):</strong> We became super close. Sanya and Rhythm drifted away and turned into our roast material (Peppa Pig).</li>
-      <li><strong>Iconic Spit Moment💦:</strong> One day at school I made her laugh so hard she spit on my face 😂💔 — legendary!</li>
-      <li><strong>Summer Break:</strong> We got even closer, talking all night and sharing everything.</li>
-      <li><strong>Food Fest:</strong> I stood in a huge line to get her food — worth it!</li>
-      <li><strong>Preboards (Dec 2023):</strong> Our last days together at school. We drew cute things and I always came on Saturdays just to see her, even if I was a defaulter.</li>
-      <li><strong>Iconic Nose Moment 👃:</strong> Another day, she laughed so much her nose started running 😂💔😭.</li>
-      <li><strong>Preboards & Boards:</strong> We took leaves to prepare, failed Maths 😂 and survived boards. (2024 batch)</li>
-      <li><strong>Post-Boards:</strong> I shifted places but we kept talking daily, still inseparable.</li>
-      <li><strong>11th Grade (2024):</strong> Both in Humanities, still super close. First meet-up at Pacific Mall with Sumehra — milku looked amazing as always.</li>
-      <li><strong>Second Meet (Dec 2024):</strong> Bought hot wheels, gifted a Kuromi keychain, won a Kinder Joy </li>
-      <li><strong>Reddit arc 😂💔:</strong> Got addicted, realised, deleted it — back to focusing on us.</li>
-      <li><strong>Today(23rd June 2025):</strong> Still talking daily, making memories, planning to meet again on the 28th. More iconic moments to come(you cheated on me with shrek💔) ❤️😜</li>
-    </ul>
-    <p><a href="home.html">← Back to Home</a></p>
+<body>
+
+  <h1>Our Magical Timeline ✨</h1>
+  <div class="timeline">
+    <div class="timeline-item">🌸 Met You</div>
+    <div class="timeline-item">💌 First Chat</div>
+    <div class="timeline-item">🎈 First Call</div>
+    <div class="timeline-item">✈️ First Trip Plan</div>
+    <div class="timeline-item">📷 First Selfie</div>
+    <!-- Add more items as you wish -->
   </div>
+
+  <!-- Floating sticker -->
+  <img src="hellog.gif" class="floating-sticker" alt="Floating Sticker">
+
+  <!-- Background Music -->
+  <audio id="bgMusic" src="bounce.mp3" loop></audio>
+  <button id="musicControl">Play Music 🎵</button>
+
+  <script>
+    // Scroll reveal
+    const items = document.querySelectorAll('.timeline-item');
+    window.addEventListener('scroll', () => {
+      const trigger = window.innerHeight * 0.85;
+      items.forEach(item => {
+        const itemTop = item.getBoundingClientRect().top;
+        if (itemTop < trigger) {
+          item.classList.add('visible');
+        }
+      });
+    });
+
+    // Background music controls
+    const music = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('musicControl');
+    let playing = false;
+
+    musicBtn.addEventListener('click', () => {
+      if (!playing) {
+        music.play();
+        musicBtn.textContent = 'Pause Music ⏸️';
+      } else {
+        music.pause();
+        musicBtn.textContent = 'Play Music 🎵';
+      }
+      playing = !playing;
+    });
+  </script>
 </body>
 </html>
