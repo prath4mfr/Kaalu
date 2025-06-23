@@ -2,45 +2,74 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Music Player</title>
+  <title>Music Page</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .album-art {
+      width: 300px;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      display: block;
+      margin: 20px auto;
+    }
+
+    .falling-gif {
+      position: fixed;
+      top: -50px;
+      width: 50px;
+      height: 50px;
+      pointer-events: none;
+      animation: dropDown 4s linear forwards;
+      z-index: 999;
+    }
+
+    @keyframes dropDown {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(120vh); opacity: 0; }
+    }
+
+    body.music-page {
+      background: url('gradient.avif') no-repeat center center fixed;
+      background-size: cover;
+    }
+  </style>
 </head>
 <body class="music-page">
+  <h1 style="text-align:center; color:white;">Enjoy the Music!</h1>
 
-  <div class="music-player">
-    <img src="cover.jpg" alt="Album Art" class="album-art">
-    <h2 id="song-title">Mr. Pratham</h2>
+  <!-- Album cover -->
+  <img src="cover.jpg" alt="Album Art" class="album-art">
 
-    <audio id="audio" src="Mr.pratham.wav"></audio>
-
-    <div class="controls">
-      <button id="playPause">▶️</button>
-      <input type="range" id="progress" value="0">
-    </div>
-  </div>
+  <!-- Actual music player -->
+  <audio id="myMusic" controls style="display:block; margin: 0 auto;">
+    <source src="Mr.pratham.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
 
   <script>
-    const audio = document.getElementById('audio');
-    const playPause = document.getElementById('playPause');
-    const progress = document.getElementById('progress');
+    const audio = document.getElementById('myMusic');
+    let dropInterval = null;
 
-    playPause.onclick = () => {
-      if (audio.paused) {
-        audio.play();
-        playPause.textContent = '⏸️';
-      } else {
-        audio.pause();
-        playPause.textContent = '▶️';
+    function createDrop() {
+      const drop = document.createElement('img');
+      drop.src = 'dawg.gif';
+      drop.className = 'falling-gif';
+      drop.style.left = Math.random() * window.innerWidth + 'px';
+      document.body.appendChild(drop);
+      setTimeout(() => drop.remove(), 4000);
+    }
+
+    audio.addEventListener('play', () => {
+      if (!dropInterval) {
+        dropInterval = setInterval(createDrop, 400);
       }
-    };
+    });
 
-    audio.ontimeupdate = () => {
-      progress.value = (audio.currentTime / audio.duration) * 100;
-    };
-
-    progress.oninput = () => {
-      audio.currentTime = (progress.value / 100) * audio.duration;
-    };
+    audio.addEventListener('pause', () => {
+      clearInterval(dropInterval);
+      dropInterval = null;
+    });
   </script>
 </body>
 </html>
