@@ -107,6 +107,13 @@ body.other-page {
   right: 30%;
 }
 
+.purple-link {
+  color: #9370DB;
+  background: rgba(147, 112, 219, 0.3);
+  top: 35%;
+  left: 50%;
+}
+
 /* ===== Password Box Inputs & Button ===== */
 .password-box input {
   background: #FFF8DC;
