@@ -34,7 +34,7 @@
       width: 100px;
       height: 100px;
       cursor: pointer;
-      transition: transform 0.1s;
+      transition: transform 0.2s;
       display: none;
     }
 
@@ -113,6 +113,15 @@
     #closeLeaderboard:hover {
       background: #bbb;
     }
+
+    #musicControl {
+      background: #BA55D3;
+      color: white;
+    }
+
+    #musicControl:hover {
+      background: #9932CC;
+    }
   </style>
 </head>
 <body>
@@ -122,6 +131,7 @@
   <button id="startGame">Start Game</button>
   <button id="restartGame" style="display: none;">Restart</button>
   <button id="showLeaderboard">🏆 Leaderboard</button>
+  <button id="musicControl">🔊 Play Music</button>
 
   <img id="character" src="hello.png" alt="Character">
 
@@ -132,6 +142,9 @@
     <button id="saveScore">Save Score</button>
     <button id="closeLeaderboard">Close</button>
   </div>
+
+  <audio id="bgMusic" src="dress.mp3" loop></audio>
+  <audio id="clickSound" src="pop.mp3"></audio>
 
   <script>
     const character = document.getElementById('character');
@@ -145,11 +158,14 @@
     const playerName = document.getElementById('playerName');
     const scoresList = document.getElementById('scoresList');
     const leaderboardDiv = document.getElementById('leaderboard');
+    const musicControlBtn = document.getElementById('musicControl');
+    const bgMusic = document.getElementById('bgMusic');
+    const clickSound = document.getElementById('clickSound');
 
     let score = 0;
     let gameRunning = false;
-    let timer = 30; // ⏳ set time in seconds
-    let countdown;  // interval reference
+    let timer = 30; 
+    let countdown;
 
     function moveCharacter() {
       const maxX = window.innerWidth - character.clientWidth;
@@ -164,13 +180,23 @@
       if (!gameRunning) return;
       score++;
       scoreDisplay.textContent = `Score: ${score}`;
+      clickSound.currentTime = 0;
+      clickSound.play();
+      animateCharacter();
       moveCharacter();
     });
+
+    function animateCharacter() {
+      character.style.transform = 'scale(1.3)';
+      setTimeout(() => {
+        character.style.transform = 'scale(1)';
+      }, 100);
+    }
 
     function startGame() {
       gameRunning = true;
       score = 0;
-      timer = 30; // ⏳ reset timer
+      timer = 30;
       scoreDisplay.textContent = `Score: ${score}`;
       timerDisplay.textContent = `Time: ${timer}`;
       startBtn.style.display = 'none';
@@ -178,7 +204,7 @@
       character.style.display = 'block';
       moveCharacter();
 
-      clearInterval(countdown); // safety
+      clearInterval(countdown);
       countdown = setInterval(() => {
         timer--;
         timerDisplay.textContent = `Time: ${timer}`;
@@ -194,7 +220,7 @@
       character.style.display = 'none';
       startBtn.style.display = 'inline-block';
       restartBtn.style.display = 'none';
-      // Player can save score now if they want!
+      alert(`⏳ Time's up!\n🎉 Your final score: ${score}`);
     }
 
     startBtn.addEventListener('click', startGame);
@@ -230,6 +256,16 @@
 
     closeLeaderboardBtn.addEventListener('click', () => {
       leaderboardDiv.style.display = 'none';
+    });
+
+    musicControlBtn.addEventListener('click', () => {
+      if (bgMusic.paused) {
+        bgMusic.play();
+        musicControlBtn.textContent = '⏸️ Pause Music';
+      } else {
+        bgMusic.pause();
+        musicControlBtn.textContent = '🔊 Play Music';
+      }
     });
 
     loadLeaderboard();
