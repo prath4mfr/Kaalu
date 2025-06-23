@@ -1,71 +1,63 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Pratham</title>
+  <title>Pratham's Page</title>
   <style>
-    html, body {
+    body {
       margin: 0;
       padding: 0;
       overflow: hidden;
-      width: 100%;
-      height: 100%;
+      background: black;
     }
-    body {
-      animation: flash 0.2s infinite alternate;
-      position: relative;
-    }
+
+    /* Flashing background */
     @keyframes flash {
       0% { background: black; }
-      100% { background: white; }
+      50% { background: white; }
+      100% { background: black; }
     }
-    a {
+    body {
+      animation: flash 0.5s infinite;
+    }
+
+    iframe {
       position: absolute;
-      color: red;
-      font-size: 20px;
-      font-weight: bold;
-      text-decoration: none;
-      animation: float 5s infinite alternate;
-    }
-    @keyframes float {
-      from { transform: translateY(0px); }
-      to { transform: translateY(20px); }
+      width: 300px;
+      height: 170px;
+      border: none;
+      box-shadow: 0 0 20px #000;
     }
   </style>
 </head>
 <body>
-
-  <audio autoplay loop>
-    <source src="COMEAROUND.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+  <!-- Background Music -->
+  <audio src="COMEAROUND.mp3" autoplay loop></audio>
 
   <script>
-    const links = [
-      'https://youtu.be/vwD0ewU0uZ8',
-      'https://youtu.be/kBFDaYf8GpU',
-      'https://youtu.be/-u7YErDZmxw',
-      'https://youtu.be/3V68zWvvJ6E',
-      'https://youtu.be/OADWgHqF8sw',
-      'https://youtu.be/a1UAkV1vs4Y',
-      'https://youtu.be/RhN07X4hcK4',
-      'https://youtu.be/Ka1QybRGkGo',
-      'https://youtu.be/O2jkV4BsN6U',
-      'https://youtu.be/NiqzAybAlqM',
-      'https://youtu.be/a24EUd0zeqI'
+    // List of YouTube embed links
+    const videoLinks = [
+      "https://www.youtube.com/embed/vwD0ewU0uZ8",
+      "https://www.youtube.com/embed/kBFDaYf8GpU",
+      "https://www.youtube.com/embed/-u7YErDZmxw",
+      "https://www.youtube.com/embed/3V68zWvvJ6E",
+      "https://www.youtube.com/embed/OADWgHqF8sw",
+      "https://www.youtube.com/embed/a1UAkV1vs4Y",
+      "https://www.youtube.com/embed/RhN07X4hcK4",
+      "https://www.youtube.com/embed/Ka1QybRGkGo",
+      "https://www.youtube.com/embed/O2jkV4BsN6U",
+      "https://www.youtube.com/embed/NiqzAybAlqM",
+      "https://www.youtube.com/embed/a24EUd0zeqI"
     ];
 
-    links.forEach(link => {
-      const a = document.createElement('a');
-      a.href = link;
-      a.target = '_blank';
-      a.textContent = 'VIDEO';
-      a.style.left = Math.random() * window.innerWidth + 'px';
-      a.style.top = Math.random() * window.innerHeight + 'px';
-      document.body.appendChild(a);
+    // For each video, create an iframe at a random position
+    videoLinks.forEach(link => {
+      const iframe = document.createElement('iframe');
+      iframe.src = link + '?autoplay=1&mute=1'; // autoplay + muted for auto play policy
+      iframe.style.top = Math.random() * (window.innerHeight - 200) + 'px';
+      iframe.style.left = Math.random() * (window.innerWidth - 320) + 'px';
+      document.body.appendChild(iframe);
     });
   </script>
-
 </body>
 </html>
