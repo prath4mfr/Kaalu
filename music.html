@@ -2,72 +2,149 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Music Page</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Music Player</title>
   <style>
-    .album-art {
-      width: 300px;
-      height: auto;
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      display: block;
-      margin: 20px auto;
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
     }
 
-    .falling-gif {
+    video#bgVideo {
       position: fixed;
-      top: -50px;
-      width: 50px;
-      height: 50px;
-      pointer-events: none;
-      animation: dropDown 4s linear forwards;
-      z-index: 999;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
     }
 
-    @keyframes dropDown {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(120vh); opacity: 0; }
+    .player {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(15px);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0,0,0,0.5);
     }
 
-    body.music-page {
-      background: url('gradient.avif') no-repeat center center fixed;
-      background-size: cover;
+    .album-art {
+      width: 250px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      margin-bottom: 20px;
+    }
+
+    .controls {
+      margin-top: 20px;
+    }
+
+    .controls button {
+      background: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      margin: 0 15px;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+      transition: background 0.3s;
+    }
+
+    .controls button:hover {
+      background: #ff69b4;
+      color: #fff;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px #000;
     }
   </style>
 </head>
-<body class="music-page">
-  <div class="music-player">
-    <h1>Mr.Pratham</h1>
-    <img src="cover.jpg" alt="Album Art" class="album-art">
-    <audio id="myMusic" controls>
-      <source src="Mr.pratham.wav" type="audio/wav">
-      Your browser does not support the audio element.
-    </audio>
+<body>
+
+  <!-- Background video -->
+  <video id="bgVideo" autoplay loop muted>
+    <source src="visual.mp4" type="video/mp4">
+  </video>
+
+  <div class="player">
+    <h1>✨ Now Playing ✨</h1>
+    <img id="cover" src="cover2.png" alt="Album Art" class="album-art">
+    <div class="controls">
+      <button id="prevBtn">⏮️</button>
+      <button id="playPauseBtn">▶️</button>
+      <button id="nextBtn">⏭️</button>
+    </div>
   </div>
 
-  <script>
-    const audio = document.getElementById('myMusic');
-    let dropInterval = null;
+  <audio id="audio"></audio>
 
-    function createDrop() {
-      const drop = document.createElement('img');
-      drop.src = 'dawg.gif';
-      drop.classList.add('falling-gif');
-      drop.style.left = Math.random() * window.innerWidth + 'px';
-      document.body.appendChild(drop);
-      setTimeout(() => drop.remove(), 4000);
+  <script>
+    const tracks = [
+      { src: 'sleep.mp3', cover: 'cover2.png' },
+      { src: 'supershy.mp3', cover: 'cover3.png' }
+    ];
+
+    let currentTrack = 0;
+
+    const audio = document.getElementById('audio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const cover = document.getElementById('cover');
+
+    // Load first track
+    function loadTrack(index) {
+      audio.src = tracks[index].src;
+      cover.src = tracks[index].cover;
+      audio.play();
+      playPauseBtn.textContent = '⏸️';
     }
 
-    audio.addEventListener('play', () => {
-      if (!dropInterval) {
-        dropInterval = setInterval(createDrop, 400);
+    // Play/Pause toggle
+    playPauseBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = '⏸️';
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = '▶️';
       }
     });
 
-    audio.addEventListener('pause', () => {
-      clearInterval(dropInterval);
-      dropInterval = null;
+    // Previous track
+    prevBtn.addEventListener('click', () => {
+      currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+      loadTrack(currentTrack);
     });
+
+    // Next track
+    nextBtn.addEventListener('click', () => {
+      currentTrack = (currentTrack + 1) % tracks.length;
+      loadTrack(currentTrack);
+    });
+
+    // Auto-next when song ends
+    audio.addEventListener('ended', () => {
+      currentTrack = (currentTrack + 1) % tracks.length;
+      loadTrack(currentTrack);
+    });
+
+    // Start with first track paused
+    loadTrack(currentTrack);
+    audio.pause();
+    playPauseBtn.textContent = '▶️';
   </script>
+
 </body>
 </html>
