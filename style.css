@@ -239,3 +239,25 @@ body.other-page {
   background: hotpink;
   color: white;
 }
+
+/* Falling GIF style */
+.falling-gif {
+  position: fixed;
+  top: -50px; /* start above the viewport */
+  width: 50px;
+  height: 50px;
+  pointer-events: none;
+  animation: dropDown 4s linear forwards;
+  z-index: 1000;
+}
+
+@keyframes dropDown {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(120vh);
+    opacity: 0;
+  }
+}
