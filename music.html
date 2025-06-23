@@ -36,16 +36,14 @@
   </style>
 </head>
 <body class="music-page">
-  <h1 style="text-align:center; color:white;">Enjoy the Music!</h1>
-
-  <!-- Album cover -->
-  <img src="cover.jpg" alt="Album Art" class="album-art">
-
-  <!-- Actual music player -->
-  <audio id="myMusic" controls style="display:block; margin: 0 auto;">
-    <source src="Mr.pratham.wav" type="audio/wav">
-    Your browser does not support the audio element.
-  </audio>
+  <div class="music-player">
+    <h1>Enjoy the Music!</h1>
+    <img src="cover.jpg" alt="Album Art" class="album-art">
+    <audio id="myMusic" controls>
+      <source src="Mr.pratham.wav" type="audio/wav">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
 
   <script>
     const audio = document.getElementById('myMusic');
@@ -54,7 +52,7 @@
     function createDrop() {
       const drop = document.createElement('img');
       drop.src = 'dawg.gif';
-      drop.className = 'falling-gif';
+      drop.classList.add('falling-gif');
       drop.style.left = Math.random() * window.innerWidth + 'px';
       document.body.appendChild(drop);
       setTimeout(() => drop.remove(), 4000);
