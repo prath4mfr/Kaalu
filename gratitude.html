@@ -2,21 +2,123 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Gratitude</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Gratitude Letter 💌</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('mail.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Verdana', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #notification {
+      background: #fff8dc;
+      padding: 20px 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      font-size: 24px;
+      margin-bottom: 40px;
+    }
+
+    #heart {
+      width: 100px;
+      height: 100px;
+      background: red;
+      position: relative;
+      transform: rotate(-45deg);
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    #heart::before,
+    #heart::after {
+      content: "";
+      width: 100px;
+      height: 100px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+    }
+
+    #heart::before {
+      top: -50px;
+      left: 0;
+    }
+
+    #heart::after {
+      top: 0;
+      left: 50px;
+    }
+
+    #heart span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    #heart:hover {
+      transform: rotate(-45deg) scale(1.1);
+    }
+
+    #letter {
+      display: none;
+      max-width: 600px;
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.4);
+      text-align: center;
+      font-size: 20px;
+      line-height: 1.6;
+      position: relative;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
-<body class="other-page">
-  <div class="content-box">
-    <h1>Thank You, Saumya 💌</h1>
-    <p>
-      So as I've said manier times at this point but you're the most milkuest, cutest, twinkest, sweetest girl ever.  
-      I'm just very lucky and thankful I enjoy every bit of time with you.  
-      I could make this way too long just appreciating you but ig that'd be just cringe 🤔  
-      I don't need no paragraph to tell you how important you are — dikh hi jata hai.  
-      Even typing all this is making me lowk cringe but for the website likh dia kuch 😜🫃  
-      Thank you Saumya, you're pretty 💖✨
-    </p>
-    <p><a href="home.html">← Back to Home</a></p>
+<body>
+
+  <div id="notification">📩 You have an unread mail!</div>
+
+  <div id="heart">
+    <span>Open 💖</span>
   </div>
+
+  <div id="letter">
+    So as I've said manier times at this point but you're the most milkuest, cutest, twinkest, sweetest girl ever.<br><br>
+    I'm just very lucky and thankful I enjoy every bit of time with you.<br><br>
+    I could make this way too long just appreciating you but ig that'd be just cringe 🤔<br><br>
+    I don't need no paragraph to tell you how important you are — dikh hi jata hai.<br><br>
+    Even typing all this is making me lowk cringe but for the website likh dia kuch 😜🫃<br><br>
+    Thank you Saumya, you're pretty 💖✨
+  </div>
+
+  <script>
+    const heart = document.getElementById('heart');
+    const letter = document.getElementById('letter');
+    const notification = document.getElementById('notification');
+
+    heart.addEventListener('click', () => {
+      letter.style.display = 'block';
+      notification.style.display = 'none';
+      heart.style.display = 'none';
+    });
+  </script>
+
 </body>
 </html>
