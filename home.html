@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Home</title>
-  <link rel="stylesheet" href="style.css" />
-  <!-- Google Font for heading -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-</head>
 <body class="home-page">
   <div class="menu">
     <img src="logo.jpg.webp" class="logo" alt="Logo">
@@ -24,22 +15,51 @@
     <img src="kuromi.png" alt="Secret Kuromi">
   </a>
 
-  <!-- ✅ Animated Hearts Script -->
-<script>
-  function createHeart() {
-    const heart = document.createElement('div');
-    heart.classList.add('heart');
+  <!-- ✅ Play/Pause Music Button -->
+  <button id="musicControl" style="
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #ffb6c1;
+    color: darkred;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  ">Play Music</button>
 
-    // Random horizontal start position
-    heart.style.left = Math.random() * window.innerWidth + 'px';
+  <!-- ✅ Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="Dreamland.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
 
-    document.body.appendChild(heart);
+  <!-- ✅ Animated Hearts Script + Music Control Script -->
+  <script>
+    // Floating Hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }
+    setInterval(createHeart, 400);
 
-    // Remove after animation
-    setTimeout(() => {
-      heart.remove();
-    }, 4000); // match animation duration
-  }
+    // Play/Pause Music
+    const music = document.getElementById('bgMusic');
+    const control = document.getElementById('musicControl');
 
-  setInterval(createHeart, 300);
-</script>
+    control.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        control.textContent = 'Pause Music';
+      } else {
+        music.pause();
+        control.textContent = 'Play Music';
+      }
+    });
+  </script>
+</body>
