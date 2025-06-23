@@ -7,104 +7,95 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  position: relative; /* Needed for absolute links */
 }
 
 /* ===== Backgrounds ===== */
-
-/* Login Page */
 body.login-page {
   background: url('brownheart.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
-/* Home Page */
 body.home-page {
   background: url('Hellokitty.jpg') no-repeat center center fixed;
   background-size: cover;
 }
 
-/* Other Pages (Slides, Gallery, Timeline, Gratitude) */
 body.other-page {
   background: url('gradient.avif') no-repeat center center fixed;
   background-size: cover;
 }
 
 /* ===== Boxes ===== */
-
-/* Common style for Home & Other pages */
 .menu,
 .content-box {
-  background: rgba(255, 182, 193, 0.8); /* pinkish for Home & Other pages */
+  background: rgba(255, 182, 193, 0.8);
   padding: 40px;
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Password box has special brown background */
 .password-box {
-  background: rgba(210, 180, 140, 0.9); /* warm brown */
+  background: rgba(210, 180, 140, 0.9);
   padding: 40px;
   border-radius: 20px;
   text-align: center;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== Logo Styling ===== */
+/* ===== Logo ===== */
 .logo {
-  width: 70px;  /* smaller for better balance */
+  width: 80px;
   height: auto;
   margin-bottom: 20px;
   border-radius: 50%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* ===== Home/Menu Heading ===== */
 .menu h1 {
   font-family: 'Dancing Script', cursive;
   font-size: 60px;
-  color: #A52A2A; /* softer dark red */
+  color: darkred; /* Dark red as you requested */
   margin-bottom: 20px;
 }
 
-
-/* === Override heading color ONLY on Home page === */
-body.home-page .menu h1 {
-  color: red;
-}
-
-/* ===== Menu Links ===== */
-.menu ul {
-  list-style: none;
-  padding: 0;
-}
-
-.menu li {
-  margin: 15px 0;
-}
-
-.menu a {
-  text-decoration: none;
-  color: #8B5E3C; /* default brown */
+/* ===== Floating Links ===== */
+.floating-link {
+  position: absolute;
   font-size: 24px;
   font-weight: bold;
-  transition: color 0.3s;
+  text-decoration: none;
 }
 
-.menu a:hover {
-  color: #A0522D;
+/* Specific link colors & positions */
+.yellow-link {
+  color: #FFD700; /* yellow */
+  top: 20%;
+  left: 10%;
+}
+
+.red-link {
+  color: #FF4500; /* red */
+  top: 50%;
+  right: 15%;
+}
+
+.pink-link {
+  color: #FF69B4; /* pink */
+  bottom: 25%;
+  left: 20%;
+}
+
+.green-link {
+  color: #32CD32; /* green */
+  bottom: 10%;
+  right: 30%;
+}
+
+/* Hover effect for floating links */
+.floating-link:hover {
   text-decoration: underline;
-}
-
-/* === Override menu links ONLY on Home page === */
-body.home-page .menu a {
-  color: black;
-}
-
-body.home-page .menu a:hover {
-  color: red; /* optional: hover red for Home page links */
 }
 
 /* ===== Password Box Inputs & Button ===== */
