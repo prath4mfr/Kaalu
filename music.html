@@ -9,14 +9,13 @@
       padding: 0;
       background: url('gradient.avif') no-repeat center center fixed;
       background-size: cover;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
       cursor: url('cursor.png'), auto;
+      overflow: hidden; /* avoid scrollbars */
     }
 
     #musicControl {
+      position: absolute;
       padding: 15px 30px;
       font-size: 20px;
       background: pink;
@@ -42,16 +41,26 @@
   </audio>
 
   <script>
-    const music = document.getElementById('bgMusic');
-    const control = document.getElementById('musicControl');
+    // ✅ Random position for the button
+    const button = document.getElementById('musicControl');
+    window.onload = () => {
+      const maxX = window.innerWidth - button.offsetWidth;
+      const maxY = window.innerHeight - button.offsetHeight;
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+      button.style.left = `${randomX}px`;
+      button.style.top = `${randomY}px`;
+    };
 
-    control.addEventListener('click', () => {
+    // ✅ Play/Pause music logic
+    const music = document.getElementById('bgMusic');
+    button.addEventListener('click', () => {
       if (music.paused) {
         music.play();
-        control.textContent = 'Pause Music';
+        button.textContent = 'Pause Music';
       } else {
         music.pause();
-        control.textContent = 'Play Music';
+        button.textContent = 'Play Music';
       }
     });
   </script>
