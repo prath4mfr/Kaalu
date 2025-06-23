@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Catch the Character 🎮</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: url('bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 20px;
+      color: white;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    #score {
+      font-size: 24px;
+      margin: 20px;
+      color: #fff;
+      text-shadow: 2px 2px 5px black;
+    }
+
+    #character {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    #leaderboard {
+      margin: 30px auto;
+      width: 300px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    #leaderboard h2 {
+      margin-top: 0;
+    }
+
+    #leaderboard ol {
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    #saveScore {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      background: #FF69B4;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    #saveScore:hover {
+      background: #FF1493;
+    }
+  </style>
+</head>
+<body>
+  <h1>Catch the Character 🐾</h1>
+  <div id="score">Score: 0</div>
+  <img id="character" src="hello.png" alt="Character">
+
+  <div id="leaderboard">
+    <h2>Leaderboard</h2>
+    <ol id="scoresList"></ol>
+    <input type="text" id="playerName" placeholder="Your name">
+    <button id="saveScore">Save Score</button>
+  </div>
+
+  <script>
+    const character = document.getElementById('character');
+    const scoreDisplay = document.getElementById('score');
+    const scoresList = document.getElementById('scoresList');
+    const saveBtn = document.getElementById('saveScore');
+    const playerName = document.getElementById('playerName');
+
+    let score = 0;
+
+    function moveCharacter() {
+      const maxX = window.innerWidth - character.clientWidth;
+      const maxY = window.innerHeight - character.clientHeight;
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+      character.style.left = `${x}px`;
+      character.style.top = `${y}px`;
+    }
+
+    character.addEventListener('click', () => {
+      score++;
+      scoreDisplay.textContent = `Score: ${score}`;
+      moveCharacter();
+    });
+
+    function loadLeaderboard() {
+      const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+      scoresList.innerHTML = '';
+      leaderboard.sort((a, b) => b.score - a.score);
+      leaderboard.slice(0, 5).forEach(entry => {
+        const li = document.createElement('li');
+        li.textContent = `${entry.name}: ${entry.score}`;
+        scoresList.appendChild(li);
+      });
+    }
+
+    saveBtn.addEventListener('click', () => {
+      const name = playerName.value.trim() || 'Anonymous';
+      const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
+      leaderboard.push({ name, score });
+      localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+      loadLeaderboard();
+      score = 0;
+      scoreDisplay.textContent = `Score: ${score}`;
+      playerName.value = '';
+    });
+
+    moveCharacter();
+    loadLeaderboard();
+  </script>
+</body>
+</html>
