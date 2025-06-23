@@ -17,7 +17,6 @@
       background-size: cover;
       color: #fff;
     }
-
     .player {
       background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(15px);
@@ -26,22 +25,20 @@
       text-align: center;
       box-shadow: 0 0 30px rgba(0,0,0,0.5);
       max-width: 400px;
+      
     }
-
     .album-art {
       width: 250px;
       border-radius: 15px;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
       margin-bottom: 20px;
     }
-
     .song-title {
       margin: 10px 0;
       font-size: 20px;
       font-weight: bold;
       text-shadow: 2px 2px 8px #000;
     }
-
     .progress-container {
       width: 100%;
       height: 8px;
@@ -50,18 +47,15 @@
       cursor: pointer;
       margin: 15px 0;
     }
-
     .progress {
       width: 0%;
       height: 100%;
       background: #ff69b4;
       border-radius: 4px;
     }
-
     .controls {
       margin: 20px 0;
     }
-
     .controls button {
       background: #fff;
       border: none;
@@ -74,16 +68,13 @@
       box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
       transition: background 0.3s;
     }
-
     .controls button:hover {
       background: #ff69b4;
       color: #fff;
     }
-
     .volume-container {
       margin: 20px 0;
     }
-
     .lyrics {
       margin-top: 20px;
       font-size: 16px;
@@ -93,7 +84,6 @@
       overflow-y: auto;
       white-space: pre-line;
     }
-
     .falling-gif {
       position: fixed;
       top: -50px;
@@ -103,12 +93,10 @@
       animation: dropDown 4s linear forwards;
       z-index: 999;
     }
-
     @keyframes dropDown {
       0% { transform: translateY(0); opacity: 1; }
       100% { transform: translateY(120vh); opacity: 0; }
     }
-
     h1 {
       margin-bottom: 20px;
       text-shadow: 2px 2px 8px #000;
@@ -142,75 +130,380 @@
     const tracks = [
       { src: 'sleep.mp3', cover: 'cover2.png', name: 'sleep.mp3' },
       { src: 'supershy.mp3', cover: 'cover3.png', name: 'Super Shy' },
-      { src: 'Mr.pratham.wav', cover: 'cover1.png', name: 'Mr.pratham.wav' }
+      { src: 'Mr.pratham.wav', cover: 'cover1.png', name: 'Mr.pratham.wav' },
+      { src: 'playingwithfire.mp3', cover: 'playingwithfire.png', name: 'Playing with Fire' },
+      { src: 'hypeboy.mp3', cover: 'hypeboy.png', name: 'Hype Boy' },
+      { src: 'loversrock.mp3', cover: 'loversrock.png', name: 'Lovers Rock' },
+      { src: 'thankunext.mp3', cover: 'thankunext.png', name: 'Thank U, Next' }
     ];
 
-    const superShyLyrics = `
-[Chorus: Danielle, Hyein, Hanni, Haerin]
-I'm super shy, super shy
-But wait a minute while I make you mine, make you mine
-Tteollineun jigeumdo, you're on my mind all the time
-I wanna tell you but I'm super shy, super shy
-I'm super shy, super shy
-But wait a minute while I make you mine, make you mine
-Tteollineun jigeumdo, you're on my mind all the time
-I wanna tell you but I'm super shy, super shy
-
-[Verse 1: Hyein, Minji]
-And I wanna go out with you, where you wanna go? (Huh?)
-Find a lil' spot, just sit and talk
-Looking pretty, follow me
-Uri duri naranhi
-Boiji? (bwa)
-Nae nuni (Heh)
-Gapjagi, binnaji
-When you say I'm your dream
-
-[Refrain: Hanni, Danielle, Minji]
-You don't even know my name, do ya?
-You don't even know my name, do ya?
-Nugubodado
-
-[Chorus: Haerin, Hyein, Hanni, Danielle]
-I'm super shy, super shy
-But wait a minute while I make you mine, make you mine
-Tteollineun jigeumdo, you're on my mind all the time
-I wanna tell you but I'm super shy, super shy
-I'm super shy, super shy
-But wait a minute while I make you mine, make you mine
-Tteollineun jigeumdo, you're on my mind all the time
-I wanna tell you but I'm super shy, super shy
-
-[Verse 2: Minji, Hanni]
-Na wollae maldo jalhago geureonde wae ireonji
-I don't like that
-Something odd about you
-Yeah, you're special and you know it
-You're the top, babe
-
-[Chorus: Danielle, Haerin, Hyein, Minji]
-I'm super shy, super shy
-But wait a minute while I make you mine, make you mine
-Tteollineun jigeumdo, you're on my mind all the time
-I wanna tell you but I'm super shy, super shy
-I'm super shy, super shy
-But wait a minute while I make you mine, make you mine
-Tteollineun jigeumdo, you're on my mind all the time
-I wanna tell you but I'm super shy, super shy
-
-[Refrain: Haerin, Danielle, Minji, Hanni, *Hyein*]
-You don't even know my name, do ya?
-You don't even know my name, do ya?
-Nugubodado
-You don't even know my name, do ya? (Super shy, super shy, make you mine, make you mine)
-*You don't even know my name, do ya?* (On my mind all the time, I wanna tell you but I'm super shy, super shy)
-`;
-
+    const superShyLyrics = `[Chorus: Danielle, Hyein, Hanni, Haerin]  
+I'm super shy, super shy  
+But wait a minute while I make you mine, make you mine  
+Tteollineun jigeumdo, you're on my mind all the time  
+I wanna tell you but I'm super shy, super shy  
+I'm super shy, super shy  
+But wait a minute while I make you mine, make you mine  
+Tteollineun jigeumdo, you're on my mind all the time  
+I wanna tell you but I'm super shy, super shy  
+  
+[Verse 1: Hyein, Minji]  
+And I wanna go out with you, where you wanna go? (Huh?)  
+Find a lil' spot, just sit and talk  
+Looking pretty, follow me  
+Uri duri naranhi  
+Boiji? (bwa)  
+Nae nuni (Heh)  
+Gapjagi, binnaji  
+When you say I'm your dream  
+  
+[Refrain: Hanni, Danielle, Minji]  
+You don't even know my name, do ya?  
+You don't even know my name, do ya?  
+Nugubodado  
+  
+[Chorus: Haerin, Hyein, Hanni, Danielle]  
+I'm super shy, super shy  
+But wait a minute while I make you mine, make you mine  
+Tteollineun jigeumdo, you're on my mind all the time  
+I wanna tell you but I'm super shy, super shy  
+I'm super shy, super shy  
+But wait a minute while I make you mine, make you mine  
+Tteollineun jigeumdo, you're on my mind all the time  
+I wanna tell you but I'm super shy, super shy  
+  
+[Verse 2: Minji, Hanni]  
+Na wollae maldo jalhago geureonde wae ireonji  
+I don't like that  
+Something odd about you  
+Yeah, you're special and you know it  
+You're the top, babe  
+  
+[Chorus: Danielle, Haerin, Hyein, Minji]  
+I'm super shy, super shy  
+But wait a minute while I make you mine, make you mine  
+Tteollineun jigeumdo, you're on my mind all the time  
+I wanna tell you but I'm super shy, super shy  
+I'm super shy, super shy  
+But wait a minute while I make you mine, make you mine  
+Tteollineun jigeumdo, you're on my mind all the time  
+I wanna tell you but I'm super shy, super shy  
+  
+[Refrain: Haerin, Danielle, Minji, Hanni, *Hyein*]  
+You don't even know my name, do ya?  
+You don't even know my name, do ya?  
+Nugubodado  
+You don't even know my name, do ya? (Super shy, super shy, make you mine, make you mine)  
+*You don't even know my name, do ya?* (On my mind all the time, I wanna tell you but I'm super shy, super shy)`;
     const mrPrathamLyrics = `
 Mr.pratham please pick up the call
 Pratham ji apka phone baj rha hai call utha lijiye 
 Pratham ji please pick up the call
 `;
+
+    const playingWithFireLyrics = `[Verse 1: Jennie, Jisoo]
+Uri eomman maeil naege malhaesseo
+Eonjena namja joshimharago
+Sarangeun machi buljangnan gataseo
+Dachinikka, eh
+Eomma mari kkok majeuljjido molla
+Neol bomyeon nae mami tteugeopge daraolla
+Duryeoumbodan neol hyanghan kkeullimi
+Deo keunikka, eh
+
+[Pre-Chorus: Rosé, Lisa]
+Meomchul su eomneun i tteollimeun, on and on and on
+Nae jeonbureul neoran sesange da deonjigo shipeo
+Look at me, look at me now, ireoke neon nal aetaeugo itjana
+Kkeul su eopseo
+[Chorus: Rosé, Jennie, Lisa, Jisoo]
+Uri sarangeun buljangnan
+(Oh-oh, oh-oh)
+My love is on fire (Ooh)
+Now burn, baby, burn
+Buljangnan
+(Oh-oh, oh-oh)
+My love is on fire (Ooh)
+So don't play with me, boy
+Buljangnan
+
+[Verse 2: Lisa]
+Oh no, nan imi meolli wabeoryeonneungeol
+Eoneusae i modeun ge jangnani anin geol
+Sarangiran ppalgan bulsshi
+Bureora baram deo keojeoganeun bulkkil
+Ige yaginji doginji uri eommado molla
+Nae mam doduginde wae gyeongchaldo molla
+Bul buteun nae shimjange deo bueora neoran gireum
+Kiss him, will I diss him?
+I don't know, but I miss him
+Jungdogeul neomeoseon i sarangeun crack
+Nae shimjange saekkareun black, ah!
+
+[Pre-Chorus: Jennie, Jisoo]
+Meomchul su eomneun i tteollimeun, on and on and on
+Nae jeonbureul neoran bulkkil sogeuro deonjigo shipeo
+Look at me, look at me now, ireoke neon nal aetaeugo itjana
+Kkeul su eopseo
+[Chorus: Rosé, Jennie, Lisa, Jisoo]
+Uri sarangeun buljangnan
+(Oh-oh, oh-oh)
+My love is on fire (Ooh)
+Now burn, baby, burn
+Buljangnan
+(Oh-oh, oh-oh)
+My love is on fire (Ooh)
+So don't play with me, boy
+Buljangnan
+
+[Bridge: Jennie, Rosé]
+Geotjabeul suga eomneun geol
+Neomuna ppalli peojeo ganeun i bulkkil
+Ireon nal meomchuji ma
+I sarangi oneul bameul taeweobeorige
+Ooh-ooh
+
+[Instrumental Outro]`;
+
+    const hypeBoyLyrics = `[Intro: Haerin]
+(Uh-uh)
+(Uh-uh)
+One, two, three, four
+
+[Verse 1: Haerin]
+Baby, got me looking so crazy
+Ppajyeobeorineun daydream
+Got me feeling you, neodo malhaejullae?
+
+[Refrain: Hanni, Danielle]
+Nuga naege mworadeun
+Namdeulgwaneun dalla neon
+Maybe you could be the one
+Nal mideobwa han beon
+I'm not looking for just fun
+Maybe I could be the one
+[Pre-Chorus: Hyein, Minji]
+Oh, baby
+Yeminhadae na lately
+Neo eopsineun maeil maeiri, yeah-eh
+Jaemieopseo, eojjeoji
+I just want you, call my phone right now
+I just wanna hеar you're mine
+
+[Chorus: Haerin, Danielle]
+'Cause I know what you likе, boy (Uh-uh)
+You're my chemical hype boy (Uh-uh)
+Nae jinan naldeureun, nun tteumyeon inneun kkum
+Hype boy, neoman wonhae
+Hype boy, naega jeonhae
+
+[Post-Chorus: Hanni, Hyein]
+And we can go hi-i-i-i-i-igh
+Malhaebwa, yeah, neukkyeobwa, mm-mm
+Take him to the sky-y-y-y-y-y (Uh-uh)
+You know, I hype you, boy
+Nuneul gama, ah-ah-ah, ah-ah (Uh-uh)
+Malhaebwa, yeah, neukkyeobwa, mm-mm
+Take him to the sky-y-y-y-y-y (Uh-uh)
+You know, I hype you, boy
+
+[Verse 2: Minji]
+Jame deullyeogo jame deullyeo haedo
+Ne saenggage tto saebyeok se si, uh-oh
+Allyeojul geoya, they can't have you no more
+Bwabwa yeogi, nae ireum sseoitdago
+Yeah-eh
+[Refrain: Haerin, Hanni]
+Nuga naege mworadeun
+Namdeulgwaneun dalla neon
+Maybe you could be the one
+Nal mideobwa han beon
+I'm not looking for just fun
+Maybe I could be the one
+
+[Pre-Chorus: Hyein, Minji]
+Oh, baby
+Yeminhadae na lately
+Neo eopsineun maeil maeiri, yeah-eh
+Jaemieopseo, eojjeoji
+I just want you, call my phone right now
+I just wanna hear you're mine
+
+[Chorus: Haerin, Hanni]
+'Cause I know what you like, boy (Uh-uh)
+You're my chemical hype boy (Uh-uh)
+Nae jinan naldeureun, nun tteumyeon inneun kkum
+Hype boy, neoman wonhae
+Hype boy, naega jeonhae
+
+[Post-Chorus: Danielle, Hyein]
+And we can go hi-i-i-i-i-igh
+Malhaebwa, yeah, neukkyeobwa, mm-mm
+Take him to the sky-y-y-y-y-y (Uh-uh)
+You know, I hype you, boy
+Nuneul gama, ah-ah-ah, ah-ah (Uh-uh)
+Malhaebwa, yeah, neukkyeobwa, mm-mm
+Take him to the sky-y-y-y-y-y (Uh-uh)
+You know, I hype you, boy`;
+
+    const loversRockLyrics = `[Verse 1: Brad Petering]
+Are you sick of me?
+Would you like to be?
+I’m tryin’ to tell you somethin’
+Somethin’ that I already said
+You like a pretty boy
+With a pretty voice
+Who is tryin’ to sell you somethin’
+Somethin’ that you already have
+Chorus: Brad Petering, Brad Petering & Faith Harding]
+But if you're too drunk to drive, and the music is right
+She might let you stay, but just for the night
+And if she grabs for your hand, and drags you along
+She might want a kiss before the end of the song
+Because love can burn like a cigarette
+And leave you with nothin'
+And leave you with nothin'
+
+[Verse 2: Brad Petering]
+While the others talked
+We were listenin' to Lover's Rock
+In her bedroom
+In her bedroom
+And if you start to kiss
+And the record skips
+Flip it over
+And sit a little closer
+
+[Chorus: Brad Petering, Brad Petering & Faith Harding]
+But if you're too drunk to drive, and the music is right
+She might let you stay, but just for the night
+And if she grabs for your hand, and drags you along
+She might want a kiss before the end of the song
+Because love can burn like a cigarette
+And leave you with nothin'
+And leave you with nothin'
+[Dialogue: Lafitte & Constance]
+Now, how many men have you kissed?
+Very few
+But you offered me a kiss. Why?
+Such a foolish reason, I'm afraid. I just wanted to kiss you
+
+[Bridge: Brad Petering]
+Du-du, du-du-du-du, du-du
+Du-du, du-du-du-du, du-du
+Du-du, du-du-du-du, du-du
+Du-du, du-du-du-du, du-du
+
+[Outro: Brad Petering, Faith Harding, Brad Petering & Faith Harding]
+Because love can burn like a cigarette (Du-du, du-du-du-du, du-du)
+(Du-du, du-du-du-du, du-du)
+And leave you with nothin' (Du-du, du-du-du-du, du-du)
+And leave you with nothin' (Du)`;
+
+    const thankUNextLyrics = `[Verse 1]
+Thought I'd end up with Sean
+But he wasn't a match
+Wrote some songs about Ricky
+Now I listen and laugh
+Even almost got married
+And for Pete, I'm so thankful
+Wish I could say, "Thank you" to Malcolm
+'Cause he was an angel
+
+[Pre-Chorus]
+One taught me love
+One taught me patience
+And one taught me pain
+Now, I'm so amazing
+Say I've loved and I've lost
+But that's not what I see
+So, look what I got
+Look what you taught me
+And for that, I say
+[Chorus]
+Thank you, next (Next)
+Thank you, next (Next)
+Thank you, next
+I'm so fuckin' grateful for my ex
+Thank you, next (Next)
+Thank you, next (Next)
+Thank you, next (Next)
+I'm so fuckin'—
+
+[Verse 2]
+Spend more time with my friends
+I ain't worried 'bout nothin'
+Plus, I met someone else
+We havin' better discussions
+I know they say I move on too fast
+But this one gon' last
+'Cause her name is Ari
+And I'm so good with that (So good with that)
+
+[Pre-Chorus]
+She taught me love (Love)
+She taught me patience (Patience)
+How she handles pain (Pain)
+That shit's amazing (Yeah, she's amazing)
+I've loved and I've lost (Yeah, yeah)
+But that's not what I see (Yeah, yeah)
+'Cause look what I've found (Yeah, yeah, I've found)
+Ain't no need for searching, and for that, I say
+[Chorus]
+Thank you, next (Thank you, next)
+Thank you, next (Thank you, next)
+Thank you, next (Thank you)
+I'm so fuckin' grateful for my ex
+Thank you, next (Thank you, next)
+Thank you, next (Said thank you, next)
+Thank you, next (Next)
+I'm so fuckin' grateful for my ex
+
+[Post-Chorus]
+Thank you, next
+Thank you, next
+Thank you, next
+I'm so fuckin'—
+
+[Bridge]
+One day I'll walk down the aisle
+Holding hands with my mama
+I'll be thanking my dad
+'Cause she grew from the drama
+Only wanna do it once, real bad
+Gon' make that shit last
+God forbid something happens
+Least this song is a smash (Song is a smash)
+[Pre-Chorus]
+I've got so much love (Love)
+Got so much patience (Patience)
+And I've learned from the pain (Pain)
+I turned out amazing (Turned out amazing)
+Say I've loved and I've lost (Yeah, yeah)
+But that's not what I see (Yeah, yeah)
+'Cause look what I've found (Yeah, yeah)
+Ain't no need for searching
+And for that, I say
+
+[Chorus]
+Thank you, next (Thank you, next)
+Thank you, next (Thank you, next)
+Thank you, next
+I'm so fuckin' grateful for my ex
+Thank you, next (Thank you, next)
+Thank you, next (Said thank you, next)
+Thank you, next (Next)
+I'm so fuckin' grateful for my ex
+
+[Post-Chorus]
+Thank you, next
+Thank you, next
+Thank you, next
+Yeah, yee
+Thank you, next
+Thank you, next
+Thank you, next
+Yeah, yee`;
 
     let currentTrack = 0;
     const audio = document.getElementById('audio');
@@ -290,12 +583,14 @@ Pratham ji please pick up the call
     });
 
     showLyricsBtn.addEventListener('click', () => {
-      if (tracks[currentTrack].name === 'Super Shy') {
-        lyricsDiv.textContent = superShyLyrics;
-      } else if (tracks[currentTrack].name === 'Mr.pratham.wav') {
-        lyricsDiv.textContent = mrPrathamLyrics;
-      } else {
-        lyricsDiv.textContent = 'No lyrics available for this track.';
+      switch (tracks[currentTrack].name) {
+        case 'Super Shy': lyricsDiv.textContent = superShyLyrics; break;
+        case 'Mr.pratham.wav': lyricsDiv.textContent = mrPrathamLyrics; break;
+        case 'Playing with Fire': lyricsDiv.textContent = playingWithFireLyrics; break;
+        case 'Hype Boy': lyricsDiv.textContent = hypeBoyLyrics; break;
+        case 'Lovers Rock': lyricsDiv.textContent = loversRockLyrics; break;
+        case 'Thank U, Next': lyricsDiv.textContent = thankUNextLyrics; break;
+        default: lyricsDiv.textContent = 'No lyrics available for this track.';
       }
     });
 
