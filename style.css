@@ -322,7 +322,7 @@ body.other-page {
 }
 
 #leaderboard input[type="text"] {
-  width: 100%;
+  width: calc(100% - 20px); /* Keeps padding in check */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 8px;
