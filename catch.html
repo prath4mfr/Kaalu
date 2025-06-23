@@ -35,55 +35,7 @@
       height: 100px;
       cursor: pointer;
       transition: transform 0.1s;
-    }
-
-    button {
-      padding: 10px 20px;
-      margin: 5px;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    #startGame {
-      background: #00CED1;
-    }
-    #startGame:hover {
-      background: #20B2AA;
-    }
-
-    #restartGame {
-      background: #9370DB;
-    }
-    #restartGame:hover {
-      background: #7B68EE;
-    }
-
-    #saveScore {
-      background: #FF69B4;
-      color: white;
-    }
-
-    #saveScore:hover {
-      background: #FF1493;
-    }
-
-    #showLeaderboard {
-      background: #FFD700;
-    }
-
-    #showLeaderboard:hover {
-      background: #FFC300;
-    }
-
-    #closeLeaderboard {
-      background: #ddd;
-    }
-
-    #closeLeaderboard:hover {
-      background: #bbb;
+      display: none; /* ✅ Hidden by default */
     }
 
     #leaderboard {
@@ -121,6 +73,51 @@
       margin: 10px 0;
       box-sizing: border-box;
     }
+
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #startGame {
+      background: #00CED1;
+      color: white;
+    }
+
+    #restartGame {
+      background: #00CED1;
+      color: white;
+    }
+
+    #saveScore {
+      background: #FF69B4;
+      color: white;
+    }
+
+    #saveScore:hover {
+      background: #FF1493;
+    }
+
+    #showLeaderboard {
+      background: #FFD700;
+    }
+
+    #showLeaderboard:hover {
+      background: #FFC300;
+    }
+
+    #closeLeaderboard {
+      background: #ddd;
+    }
+
+    #closeLeaderboard:hover {
+      background: #bbb;
+    }
   </style>
 </head>
 <body>
@@ -128,9 +125,9 @@
   <div id="score">Score: 0</div>
   <button id="startGame">Start Game</button>
   <button id="restartGame" style="display: none;">Restart</button>
-  <img id="character" src="hello.png" alt="Character">
+  <button id="showLeaderboard">🏆 Leaderboard</button>
 
-  <button id="showLeaderboard">🏆 Show Leaderboard</button>
+  <img id="character" src="hello.png" alt="Character">
 
   <div id="leaderboard">
     <h2>Leaderboard</h2>
@@ -143,14 +140,14 @@
   <script>
     const character = document.getElementById('character');
     const scoreDisplay = document.getElementById('score');
-    const scoresList = document.getElementById('scoresList');
-    const saveBtn = document.getElementById('saveScore');
-    const playerName = document.getElementById('playerName');
-    const leaderboardDiv = document.getElementById('leaderboard');
-    const showLeaderboardBtn = document.getElementById('showLeaderboard');
-    const closeLeaderboardBtn = document.getElementById('closeLeaderboard');
     const startBtn = document.getElementById('startGame');
     const restartBtn = document.getElementById('restartGame');
+    const showLeaderboardBtn = document.getElementById('showLeaderboard');
+    const saveBtn = document.getElementById('saveScore');
+    const closeLeaderboardBtn = document.getElementById('closeLeaderboard');
+    const playerName = document.getElementById('playerName');
+    const scoresList = document.getElementById('scoresList');
+    const leaderboardDiv = document.getElementById('leaderboard');
 
     let score = 0;
     let gameRunning = false;
@@ -177,6 +174,7 @@
       scoreDisplay.textContent = `Score: ${score}`;
       startBtn.style.display = 'none';
       restartBtn.style.display = 'inline-block';
+      character.style.display = 'block'; // ✅ Show character
       moveCharacter();
     });
 
@@ -184,6 +182,7 @@
       gameRunning = true;
       score = 0;
       scoreDisplay.textContent = `Score: ${score}`;
+      character.style.display = 'block'; // ✅ Show character again
       moveCharacter();
     });
 
@@ -208,6 +207,10 @@
       scoreDisplay.textContent = `Score: ${score}`;
       playerName.value = '';
       leaderboardDiv.style.display = 'none';
+      gameRunning = false;
+      character.style.display = 'none'; // ✅ Hide character
+      startBtn.style.display = 'inline-block';
+      restartBtn.style.display = 'none';
     });
 
     showLeaderboardBtn.addEventListener('click', () => {
