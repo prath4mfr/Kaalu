@@ -68,7 +68,7 @@
       border-radius: 50%;
       width: 60px;
       height: 60px;
-      margin: 0 15px;
+      margin: 0 10px;
       font-size: 24px;
       cursor: pointer;
       box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
@@ -89,13 +89,9 @@
       font-size: 16px;
       line-height: 1.4;
       text-align: left;
-      height: 140px;
+      max-height: 200px;
       overflow-y: auto;
-    }
-
-    .current-line {
-      color: #ff69b4;
-      font-weight: bold;
+      white-space: pre-line;
     }
 
     .falling-gif {
@@ -132,6 +128,7 @@
       <button id="prevBtn">⏮️</button>
       <button id="playPauseBtn">▶️</button>
       <button id="nextBtn">⏭️</button>
+      <button id="showLyricsBtn">🎤</button>
     </div>
     <div class="volume-container">
       Volume: <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
@@ -141,150 +138,171 @@
 
   <audio id="audio"></audio>
 
-<script>
-  const tracks = [
-    { src: 'sleep.mp3', cover: 'cover2.png', name: 'sleep.mp3' },
-    { src: 'supershy.mp3', cover: 'cover3.png', name: 'Super Shy' },
-    { src: 'Mr.pratham.mp3', cover: 'cover.png', name: 'Mr.pratham.mp3' }
-  ];
+  <script>
+    const tracks = [
+      { src: 'sleep.mp3', cover: 'cover2.png', name: 'sleep.mp3' },
+      { src: 'supershy.mp3', cover: 'cover3.png', name: 'Super Shy' },
+      { src: 'Mr.pratham.mp3', cover: 'cover.png', name: 'Mr.pratham.wav' }
+    ];
 
-  const superShyLyrics = [
-  { time: 12.0, text: "I'm super shy, super shy" },
-  { time: 16.0, text: "But wait a minute while I make you mine, make you mine" },
-  { time: 20.0, text: "떨리는 지금도 you're on my mind all the time" },
-  { time: 24.0, text: "I wanna tell you but I'm super shy, super shy" },
-  { time: 28.5, text: "And I wanna go out with you" },
-  { time: 30.5, text: "Where you wanna go? (Huh?)" },
-  { time: 32.5, text: "Find a lil' spot, just sit and talk" },
-  { time: 35.0, text: "Looking pretty, follow me" },
-  { time: 37.0, text: "우리 둘이 나란히" },
-  { time: 39.0, text: "너와 나 사이 사소한 것까지 다" },
-  { time: 42.0, text: "하나부터 열까지 다 wanna know" },
-  { time: 45.0, text: "우리들만의 비밀 암호" },
-  { time: 48.0, text: "걱정하지 마 baby I know" },
-  { time: 51.0, text: "You make me shy but I won't lie" },
-  { time: 54.0, text: "I got a crush on you, who knew?" },
-  { time: 57.0, text: "날 가만히 두질 않아" },
-  { time: 60.0, text: "You make me wanna risk it all" },
-  { time: 63.0, text: "I'm super shy, super shy" },
-  { time: 67.0, text: "But wait a minute while I make you mine, make you mine" },
-  { time: 71.0, text: "떨리는 지금도 you're on my mind all the time" },
-  { time: 75.0, text: "I wanna tell you but I'm super shy, super shy" },
-  { time: 79.5, text: "I'm super shy, super shy" },
-  { time: 83.0, text: "But wait a minute while I make you mine, make you mine" },
-  { time: 87.0, text: "떨리는 지금도 you're on my mind all the time" },
-  { time: 91.0, text: "I wanna tell you but I'm super shy, super shy" },
-  { time: 95.0, text: "하루 종일 머릿속엔 네 생각만 가득해" },
-  { time: 98.0, text: "다른 사람 말고 너라서 이렇게 웃을 수 있어" },
-  { time: 101.0, text: "I got a crush on you (Crush on you)" },
-  { time: 103.5, text: "누구에게도 안 보여줬던 내 모습까지 다" },
-  { time: 107.0, text: "너에게만 보여주고 싶어" },
-  { time: 110.0, text: "너무 짜릿해 can't hide it" },
-  { time: 112.0, text: "날 가만히 두질 않아" },
-  { time: 115.0, text: "You make me wanna risk it all" },
-  { time: 118.0, text: "I'm super shy, super shy" },
-  { time: 122.0, text: "But wait a minute while I make you mine, make you mine" },
-  { time: 126.0, text: "떨리는 지금도 you're on my mind all the time" },
-  { time: 130.0, text: "I wanna tell you but I'm super shy, super shy" },
-  { time: 134.0, text: "I'm super shy, super shy" },
-  { time: 138.0, text: "But wait a minute while I make you mine, make you mine" },
-  { time: 142.0, text: "떨리는 지금도 you're on my mind all the time" },
-  { time: 146.0, text: "I wanna tell you but I'm super shy, super shy" }
-];
+    const superShyLyrics = `
+[Chorus: Danielle, Hyein, Hanni, Haerin]
+I'm super shy, super shy
+But wait a minute while I make you mine, make you mine
+Tteollineun jigeumdo, you're on my mind all the time
+I wanna tell you but I'm super shy, super shy
+I'm super shy, super shy
+But wait a minute while I make you mine, make you mine
+Tteollineun jigeumdo, you're on my mind all the time
+I wanna tell you but I'm super shy, super shy
 
-  let currentTrack = 0;
-  const audio = document.getElementById('audio');
-  const playPauseBtn = document.getElementById('playPauseBtn');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const cover = document.getElementById('cover');
-  const songTitle = document.getElementById('songTitle');
-  const progress = document.getElementById('progress');
-  const progressContainer = document.getElementById('progressContainer');
-  const volume = document.getElementById('volume');
-  const lyricsDiv = document.getElementById('lyrics');
+[Verse 1: Hyein, Minji]
+And I wanna go out with you, where you wanna go? (Huh?)
+Find a lil' spot, just sit and talk
+Looking pretty, follow me
+Uri duri naranhi
+Boiji? (bwa)
+Nae nuni (Heh)
+Gapjagi, binnaji
+When you say I'm your dream
 
-  let dropInterval = null;
+[Refrain: Hanni, Danielle, Minji]
+You don't even know my name, do ya?
+You don't even know my name, do ya?
+Nugubodado
 
-  function loadTrack(index) {
-    audio.src = tracks[index].src;
-    cover.src = tracks[index].cover;
-    songTitle.textContent = tracks[index].name;
-    audio.play();
-    playPauseBtn.textContent = '⏸️';
-    lyricsDiv.innerHTML = '';
-  }
+[Chorus: Haerin, Hyein, Hanni, Danielle]
+I'm super shy, super shy
+But wait a minute while I make you mine, make you mine
+Tteollineun jigeumdo, you're on my mind all the time
+I wanna tell you but I'm super shy, super shy
+I'm super shy, super shy
+But wait a minute while I make you mine, make you mine
+Tteollineun jigeumdo, you're on my mind all the time
+I wanna tell you but I'm super shy, super shy
 
-  function createDrop() {
-    const drop = document.createElement('img');
-    drop.src = 'dawg.gif';
-    drop.classList.add('falling-gif');
-    drop.style.left = Math.random() * window.innerWidth + 'px';
-    document.body.appendChild(drop);
-    setTimeout(() => drop.remove(), 4000);
-  }
+[Verse 2: Minji, Hanni]
+Na wollae maldo jalhago geureonde wae ireonji
+I don't like that
+Something odd about you
+Yeah, you're special and you know it
+You're the top, babe
 
-  playPauseBtn.addEventListener('click', () => {
-    if (audio.paused) {
+[Chorus: Danielle, Haerin, Hyein, Minji]
+I'm super shy, super shy
+But wait a minute while I make you mine, make you mine
+Tteollineun jigeumdo, you're on my mind all the time
+I wanna tell you but I'm super shy, super shy
+I'm super shy, super shy
+But wait a minute while I make you mine, make you mine
+Tteollineun jigeumdo, you're on my mind all the time
+I wanna tell you but I'm super shy, super shy
+
+[Refrain: Haerin, Danielle, Minji, Hanni, *Hyein*]
+You don't even know my name, do ya?
+You don't even know my name, do ya?
+Nugubodado
+You don't even know my name, do ya? (Super shy, super shy, make you mine, make you mine)
+*You don't even know my name, do ya?* (On my mind all the time, I wanna tell you but I'm super shy, super shy)
+`;
+
+    const mrPrathamLyrics = `
+Mr.pratham please pick up the call
+Pratham ji apka phone baj rha hai call utha lijiye 
+Pratham ji please pick up the call
+`;
+
+    let currentTrack = 0;
+    const audio = document.getElementById('audio');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const showLyricsBtn = document.getElementById('showLyricsBtn');
+    const cover = document.getElementById('cover');
+    const songTitle = document.getElementById('songTitle');
+    const progress = document.getElementById('progress');
+    const progressContainer = document.getElementById('progressContainer');
+    const volume = document.getElementById('volume');
+    const lyricsDiv = document.getElementById('lyrics');
+
+    let dropInterval = null;
+
+    function loadTrack(index) {
+      audio.src = tracks[index].src;
+      cover.src = tracks[index].cover;
+      songTitle.textContent = tracks[index].name;
       audio.play();
       playPauseBtn.textContent = '⏸️';
-      if (!dropInterval) dropInterval = setInterval(createDrop, 400);
-    } else {
-      audio.pause();
-      playPauseBtn.textContent = '▶️';
-      clearInterval(dropInterval);
-      dropInterval = null;
-    }
-  });
-
-  prevBtn.addEventListener('click', () => {
-    currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
-    loadTrack(currentTrack);
-  });
-
-  nextBtn.addEventListener('click', () => {
-    currentTrack = (currentTrack + 1) % tracks.length;
-    loadTrack(currentTrack);
-  });
-
-  audio.addEventListener('ended', () => {
-    currentTrack = (currentTrack + 1) % tracks.length;
-    loadTrack(currentTrack);
-  });
-
-  audio.addEventListener('timeupdate', () => {
-    const percent = (audio.currentTime / audio.duration) * 100;
-    progress.style.width = percent + '%';
-
-    if (tracks[currentTrack].name === 'Super Shy') {
-      const currentTime = audio.currentTime;
-      let activeLine = '';
-      for (let i = 0; i < superShyLyrics.length; i++) {
-        if (currentTime >= superShyLyrics[i].time) {
-          activeLine = superShyLyrics[i].text;
-        }
-      }
-      lyricsDiv.innerHTML = `<div class="current-line">${activeLine}</div>`;
-    } else {
       lyricsDiv.innerHTML = '';
     }
-  });
 
-  progressContainer.addEventListener('click', (e) => {
-    const width = progressContainer.clientWidth;
-    const clickX = e.offsetX;
-    const duration = audio.duration;
-    audio.currentTime = (clickX / width) * duration;
-  });
+    function createDrop() {
+      const drop = document.createElement('img');
+      drop.src = 'dawg.gif';
+      drop.classList.add('falling-gif');
+      drop.style.left = Math.random() * window.innerWidth + 'px';
+      document.body.appendChild(drop);
+      setTimeout(() => drop.remove(), 4000);
+    }
 
-  volume.addEventListener('input', () => {
-    audio.volume = volume.value;
-  });
+    playPauseBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        playPauseBtn.textContent = '⏸️';
+        if (!dropInterval) dropInterval = setInterval(createDrop, 400);
+      } else {
+        audio.pause();
+        playPauseBtn.textContent = '▶️';
+        clearInterval(dropInterval);
+        dropInterval = null;
+      }
+    });
 
-  loadTrack(currentTrack);
-  audio.pause();
-  playPauseBtn.textContent = '▶️';
-</script>
+    prevBtn.addEventListener('click', () => {
+      currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
+      loadTrack(currentTrack);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentTrack = (currentTrack + 1) % tracks.length;
+      loadTrack(currentTrack);
+    });
+
+    audio.addEventListener('ended', () => {
+      currentTrack = (currentTrack + 1) % tracks.length;
+      loadTrack(currentTrack);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progress.style.width = percent + '%';
+    });
+
+    progressContainer.addEventListener('click', (e) => {
+      const width = progressContainer.clientWidth;
+      const clickX = e.offsetX;
+      const duration = audio.duration;
+      audio.currentTime = (clickX / width) * duration;
+    });
+
+    volume.addEventListener('input', () => {
+      audio.volume = volume.value;
+    });
+
+    showLyricsBtn.addEventListener('click', () => {
+      if (tracks[currentTrack].name === 'Super Shy') {
+        lyricsDiv.textContent = superShyLyrics;
+      } else if (tracks[currentTrack].name === 'Mr.pratham.wav') {
+        lyricsDiv.textContent = mrPrathamLyrics;
+      } else {
+        lyricsDiv.textContent = 'No lyrics available for this track.';
+      }
+    });
+
+    loadTrack(currentTrack);
+    audio.pause();
+    playPauseBtn.textContent = '▶️';
+  </script>
 
 </body>
 </html>
