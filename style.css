@@ -309,3 +309,37 @@ body.other-page {
   width: 100%;
   margin-top: 20px;
 }
+
+#leaderboard input[type="text"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 10px;
+  box-sizing: border-box;
+}
+
+#leaderboard {
+  margin: 30px auto;
+  width: 300px;
+  max-width: 90%;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#leaderboard button {
+  margin: 10px 5px 0;
+  padding: 10px 20px;
+  border: none;
+  background: #FF69B4;
+  color: white;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#leaderboard button:hover {
+  background: #FF1493;
+}
