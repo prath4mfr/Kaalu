@@ -182,3 +182,29 @@ body.other-page {
 .easter-egg img:hover {
   transform: scale(1.2) rotate(10deg);
 }
+
+/* ===== Animated Floating Hearts ===== */
+.heart {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background: url('heart.png') no-repeat center;
+  background-size: contain;
+  pointer-events: none;
+  animation: floatUp 2s linear forwards;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50px) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-200px) scale(0.8);
+    opacity: 0;
+  }
+}
