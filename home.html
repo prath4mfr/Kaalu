@@ -6,14 +6,12 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="home-page">
-
-  <!-- Menu and heading -->
   <div class="menu">
     <img src="logo.jpg.webp" class="logo" alt="Logo">
     <h1>Welcome, Milku!</h1>
   </div>
 
-  <!-- Floating Links -->
+  <!-- Links -->
   <a href="slides.html" class="floating-link yellow-link">Reasons Why You Should</a>
   <a href="gallery.html" class="floating-link red-link">Memories</a>
   <a href="timeline.html" class="floating-link pink-link">Timeline</a>
@@ -25,16 +23,15 @@
     <img src="kuromi.png" alt="Secret Kuromi">
   </a>
 
-  <!-- ✅ Music Control Button -->
-  <button id="musicControl" class="music-control">Play Music</button>
+  <!-- Play/Pause Button -->
+  <button id="musicControl" class="music-control">Pause Music</button>
 
-  <!-- ✅ Background Music -->
-  <audio id="bgMusic" loop>
-    <source src="Dreamland.mp3" type="audio/mp4">
+  <!-- Background Music -->
+  <audio id="bgMusic" loop autoplay>
+    <source src="Dreamland.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
   </audio>
 
-  <!-- ✅ Scripts for hearts + music -->
   <script>
     // Floating Hearts
     function createHeart() {
@@ -50,11 +47,16 @@
     const music = document.getElementById('bgMusic');
     const control = document.getElementById('musicControl');
 
+    // Try to play automatically
+    window.addEventListener('load', () => {
+      music.play().catch(err => {
+        // Some browsers block autoplay; ignore error
+      });
+    });
+
     control.addEventListener('click', () => {
       if (music.paused) {
-        music.play().catch(error => {
-          console.log("Playback prevented by browser:", error);
-        });
+        music.play();
         control.textContent = 'Pause Music';
       } else {
         music.pause();
@@ -62,6 +64,5 @@
       }
     });
   </script>
-
 </body>
 </html>
