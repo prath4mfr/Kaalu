@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Our Magical Timeline ✨</title>
+  <title>Our Story Timeline ✨</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       background: url('scrap.png') no-repeat center center fixed;
       background-size: cover;
-      font-family: 'Dancing Script', cursive;
+      font-family: Arial, sans-serif; /* clean, normal font */
       overflow-x: hidden;
     }
 
@@ -18,48 +18,55 @@
       color: #fff;
       text-shadow: 2px 2px 8px #000;
       margin-top: 30px;
+      font-family: 'Dancing Script', cursive; /* pretty font only for heading */
+    }
+
+    .scroll-hint {
+      text-align: center;
+      color: #fff;
+      margin-top: 10px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(10px); }
     }
 
     .timeline {
-.timeline {
-  max-width: 600px;
-  margin: 50px auto;
-  padding: 30px;
-  background: #fefefe; /* solid paper white */
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
-  line-height: 1.6;
-}
-
-.timeline-item {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: all 1s ease;
-  margin: 20px 0;
-  color: #333; /* warm dark text for readability */
-  font-size: 18px; /* slightly larger for clarity */
-}
-
-    .timeline-item.visible {
-      opacity: 1;
-      transform: translateY(0);
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      background: #fefefe;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      line-height: 1.6;
     }
 
+    .timeline-item {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+      margin: 20px 0;
+      color: #333;
+      font-size: 18px;
+    }
+
+    /* Floating sticker random floating */
     .floating-sticker {
-      position: fixed;
+      position: absolute;
       width: 60px;
       height: 60px;
       pointer-events: none;
-      animation: floatAround 20s linear infinite;
-      z-index: 10;
+      animation: floatRandom 15s linear infinite alternate;
     }
 
-    @keyframes floatAround {
-      0% { top: 10%; left: 5%; }
-      25% { top: 30%; left: 80%; }
-      50% { top: 60%; left: 50%; }
-      75% { top: 80%; left: 10%; }
-      100% { top: 10%; left: 5%; }
+    @keyframes floatRandom {
+      0%   { top: 10%; left: 10%; }
+      25%  { top: 30%; left: 80%; }
+      50%  { top: 60%; left: 50%; }
+      75%  { top: 80%; left: 20%; }
+      100% { top: 10%; left: 10%; }
     }
 
     #musicControl {
@@ -79,23 +86,20 @@
 <body>
 
   <h1>Our Story Timeline ✨</h1>
+  <div class="scroll-hint">📜 Scroll Down to Read ⬇️</div>
 
   <div class="timeline">
-    <div class="timeline-item">📚 9th Grade: Asked her about her mask. That was the tiny start of everything.</div>
-    <div class="timeline-item">👯‍♀️ Her squad back then: Rhythm, Sanya & Sumehra. Slowly got her Snapchat... then Insta (after months of begging 😂).</div>
-    <div class="timeline-item">💬 Closer & Closer: 10th grade — we got super close. Rhythm & Sanya drifted away... became roast material. Peppa Pig 🐷 forever.</div>
-    <div class="timeline-item">🤣 Spit Incident: Made her laugh so bad she spit on my face. Legendary.</div>
-    <div class="timeline-item">🌙 Late Night Talks: Summer break — nights full of talks, secrets, exploring each other’s lore.</div>
-    <div class="timeline-item">🍴 Food Fest: Stood in the longest line just to get her food. No regrets.</div>
-    <div class="timeline-item">🎨 Last School Days: Preboards near, last days at school — she drew uwu on my hand daily 🥺. Saturdays were for her only, defaulter every time 😂.</div>
-    <div class="timeline-item">😂 Another Iconic LOL: She laughed so hard once, her nose ran down 😭.</div>
-    <div class="timeline-item">📖 Preboards ➜ Boards: Failed maths but survived boards together. (Boards ended on 13 May 2024!)</div>
-    <div class="timeline-item">🏠 Moved Away: Shifted to another place but daily talks never paused.</div>
-    <div class="timeline-item">🎓 11th Grade: Both took Humanities. Vibes same, bond stronger.</div>
-    <div class="timeline-item">🏙️ First Meet: Met at Pacific Mall with Sumehra. She looked perfect, fun day!</div>
-    <div class="timeline-item">🎁 Second Meet: Bought Hot Wheels, gifted Kuromi keychain, won Kinder Joy. Cute day 😌.</div>
-    <div class="timeline-item">📵 Reddit Phase: Got too addicted, realised, deleted. More time for her 🤭.</div>
-    <div class="timeline-item">🫧 Now & Next: Still daily talks, more memories to come. Next meet: 28th! 🗓️✨</div>
+    <div class="timeline-item">📚 9th Grade — I asked Saumya about her mask. That's how it began.</div>
+    <div class="timeline-item">👯‍♀️ Befriended her group: Rhythm, Sanya & Sumehra. Slowly got her Snapchat & Insta.</div>
+    <div class="timeline-item">💬 10th Grade — We got closer, others drifted. Peppa Pig jokes & inside roasts.</div>
+    <div class="timeline-item">😂 Iconic spit & nose incidents from laughing too hard.</div>
+    <div class="timeline-item">🌙 Late night talks, summer break memories, bonding 24/7.</div>
+    <div class="timeline-item">🍴 Food fest — longest lines for her food. Worth it every time.</div>
+    <div class="timeline-item">🎨 Preboards: last days together, cute doodles, Saturdays just for her.</div>
+    <div class="timeline-item">📖 Boards: Struggled & survived together. Shifted houses but kept talking daily.</div>
+    <div class="timeline-item">🏙️ 11th Grade: Both took Humanities. Vibes strong as ever.</div>
+    <div class="timeline-item">🏬 Met at Pacific, then again in December — gifts, Hot Wheels, Kuromi, Kinder Joys.</div>
+    <div class="timeline-item">🫧 Now (June 23): Still talking daily. Next meet? 28th — and many more to come!</div>
   </div>
 
   <!-- Floating sticker -->
