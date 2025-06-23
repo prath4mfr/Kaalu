@@ -13,26 +13,19 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      background: url('hello3.png') no-repeat center center fixed;
+      background-size: cover;
       color: #fff;
     }
 
-    video#bgVideo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      min-width: 100%;
-      min-height: 100%;
-      object-fit: cover;
-      z-index: -1;
-    }
-
     .player {
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(15px);
       padding: 40px;
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 0 30px rgba(0,0,0,0.5);
+      max-width: 350px;
     }
 
     .album-art {
@@ -42,8 +35,15 @@
       margin-bottom: 20px;
     }
 
+    .song-title {
+      margin: 10px 0;
+      font-size: 20px;
+      font-weight: bold;
+      text-shadow: 2px 2px 8px #000;
+    }
+
     .controls {
-      margin-top: 20px;
+      margin: 20px 0;
     }
 
     .controls button {
@@ -64,6 +64,21 @@
       color: #fff;
     }
 
+    .progress-container {
+      width: 100%;
+      height: 8px;
+      background: #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .progress {
+      width: 0%;
+      height: 100%;
+      background: #ff69b4;
+      border-radius: 4px;
+    }
+
     h1 {
       margin-bottom: 20px;
       text-shadow: 2px 2px 8px #000;
@@ -72,14 +87,13 @@
 </head>
 <body>
 
-  <!-- Background video -->
-  <video id="bgVideo" autoplay loop muted>
-    <source src="visual.mp4" type="video/mp4">
-  </video>
-
   <div class="player">
     <h1>✨ Now Playing ✨</h1>
     <img id="cover" src="cover2.png" alt="Album Art" class="album-art">
+    <div class="song-title" id="songTitle">sleep.mp3</div>
+    <div class="progress-container" id="progressContainer">
+      <div class="progress" id="progress"></div>
+    </div>
     <div class="controls">
       <button id="prevBtn">⏮️</button>
       <button id="playPauseBtn">▶️</button>
@@ -91,8 +105,9 @@
 
   <script>
     const tracks = [
-      { src: 'sleep.mp3', cover: 'cover2.png' },
-      { src: 'supershy.mp3', cover: 'cover3.png' }
+      { src: 'sleep.mp3', cover: 'cover2.png', name: 'sleep.mp3' },
+      { src: 'supershy.mp3', cover: 'cover3.png', name: 'supershy.mp3' },
+      { src: 'Mr.pratham.mp3', cover: 'cover.jpg', name: 'Mr.pratham.mp3' }
     ];
 
     let currentTrack = 0;
@@ -102,16 +117,18 @@
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const cover = document.getElementById('cover');
+    const songTitle = document.getElementById('songTitle');
+    const progress = document.getElementById('progress');
+    const progressContainer = document.getElementById('progressContainer');
 
-    // Load first track
     function loadTrack(index) {
       audio.src = tracks[index].src;
       cover.src = tracks[index].cover;
+      songTitle.textContent = tracks[index].name;
       audio.play();
       playPauseBtn.textContent = '⏸️';
     }
 
-    // Play/Pause toggle
     playPauseBtn.addEventListener('click', () => {
       if (audio.paused) {
         audio.play();
@@ -122,25 +139,34 @@
       }
     });
 
-    // Previous track
     prevBtn.addEventListener('click', () => {
       currentTrack = (currentTrack - 1 + tracks.length) % tracks.length;
       loadTrack(currentTrack);
     });
 
-    // Next track
     nextBtn.addEventListener('click', () => {
       currentTrack = (currentTrack + 1) % tracks.length;
       loadTrack(currentTrack);
     });
 
-    // Auto-next when song ends
     audio.addEventListener('ended', () => {
       currentTrack = (currentTrack + 1) % tracks.length;
       loadTrack(currentTrack);
     });
 
-    // Start with first track paused
+    audio.addEventListener('timeupdate', () => {
+      const percent = (audio.currentTime / audio.duration) * 100;
+      progress.style.width = percent + '%';
+    });
+
+    progressContainer.addEventListener('click', (e) => {
+      const width = progressContainer.clientWidth;
+      const clickX = e.offsetX;
+      const duration = audio.duration;
+      audio.currentTime = (clickX / width) * duration;
+    });
+
+    // Init
     loadTrack(currentTrack);
     audio.pause();
     playPauseBtn.textContent = '▶️';
