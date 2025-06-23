@@ -126,6 +126,13 @@ body.other-page {
   color: white;
 }
 
+.custom-feedback {
+  position: absolute;
+  top: 250px;
+  left: 65%;
+  background: #1E90FF;
+  color: white;
+}
 /* ===== Password Box Inputs & Button ===== */
 .password-box input {
   background: #FFF8DC;
