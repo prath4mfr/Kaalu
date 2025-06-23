@@ -2,43 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Music Page</title>
+  <title>Music Player</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="other-page"> <!-- ✅ match your style -->
-  <div class="content-box"> <!-- ✅ pretty container -->
-    <h1>Music!</h1>
+<body class="music-page">
 
-    <!-- Actual music player -->
-    <audio id="myMusic" controls>
-      <source src="Mr.pratham.wav" type="audio/wav">
-      Your browser does not support the audio element.
-    </audio>
+  <div class="music-player">
+    <img src="cover.jpg" alt="Album Art" class="album-art">
+    <h2 id="song-title">Mr. Pratham</h2>
+
+    <audio id="audio" src="Mr.pratham.wav"></audio>
+
+    <div class="controls">
+      <button id="playPause">▶️</button>
+      <input type="range" id="progress" value="0">
+    </div>
   </div>
 
   <script>
-    const audio = document.getElementById('myMusic');
-    let dropInterval = null;
+    const audio = document.getElementById('audio');
+    const playPause = document.getElementById('playPause');
+    const progress = document.getElementById('progress');
 
-    function createDrop() {
-      const drop = document.createElement('img');
-      drop.src = 'dawg.gif';
-      drop.classList.add('falling-gif');
-      drop.style.left = Math.random() * window.innerWidth + 'px';
-      document.body.appendChild(drop);
-      setTimeout(() => drop.remove(), 4000);
-    }
-
-    audio.addEventListener('play', () => {
-      if (!dropInterval) {
-        dropInterval = setInterval(createDrop, 400);
+    playPause.onclick = () => {
+      if (audio.paused) {
+        audio.play();
+        playPause.textContent = '⏸️';
+      } else {
+        audio.pause();
+        playPause.textContent = '▶️';
       }
-    });
+    };
 
-    audio.addEventListener('pause', () => {
-      clearInterval(dropInterval);
-      dropInterval = null;
-    });
+    audio.ontimeupdate = () => {
+      progress.value = (audio.currentTime / audio.duration) * 100;
+    };
+
+    progress.oninput = () => {
+      audio.currentTime = (progress.value / 100) * audio.duration;
+    };
   </script>
 </body>
 </html>
