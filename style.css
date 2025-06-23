@@ -160,3 +160,25 @@ body.other-page {
 .timeline li {
   margin: 15px 0;
 }
+
+/* ===== Easter Egg Kuromi Icon ===== */
+.easter-egg {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+.easter-egg img {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.easter-egg img:hover {
+  transform: scale(1.2) rotate(10deg);
+}
