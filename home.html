@@ -4,39 +4,27 @@
     <h1>Welcome, Milku!</h1>
   </div>
 
-  <!-- Random links -->
+  <!-- Floating Links -->
   <a href="slides.html" class="floating-link yellow-link">Reasons Why You Should</a>
   <a href="gallery.html" class="floating-link red-link">Memories</a>
   <a href="timeline.html" class="floating-link pink-link">Timeline</a>
   <a href="gratitude.html" class="floating-link green-link">Gratitude Letter</a>
 
-  <!-- ✅ Easter Egg Kuromi Icon -->
+  <!-- Easter Egg -->
   <a href="secret.html" class="easter-egg">
     <img src="kuromi.png" alt="Secret Kuromi">
   </a>
 
-  <!-- ✅ Play/Pause Music Button -->
-  <button id="musicControl" style="
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    background: #ffb6c1;
-    color: darkred;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  ">Play Music</button>
+  <!-- Play/Pause Music Button -->
+  <button id="musicControl" class="music-control">Play Music</button>
 
-  <!-- ✅ Background Music -->
+  <!-- Background Music (using your file name) -->
   <audio id="bgMusic" loop>
-    <source src="Dreamland.mp3" type="audio/mpeg">
+    <source src="Dreamland.mp3" type="audio/mp4">
     Your browser does not support the audio element.
   </audio>
 
-  <!-- ✅ Animated Hearts Script + Music Control Script -->
+  <!-- Hearts + Music Script -->
   <script>
     // Floating Hearts
     function createHeart() {
@@ -48,7 +36,7 @@
     }
     setInterval(createHeart, 400);
 
-    // Play/Pause Music
+    // Music Control
     const music = document.getElementById('bgMusic');
     const control = document.getElementById('musicControl');
 
