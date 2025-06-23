@@ -25,12 +25,12 @@
   </a>
 
   <!-- ✅ Animated Hearts Script -->
-  <script>
+<script>
   function createHeart() {
     const heart = document.createElement('div');
     heart.classList.add('heart');
 
-    // Random horizontal position within the viewport width
+    // Random horizontal start position
     heart.style.left = Math.random() * window.innerWidth + 'px';
 
     document.body.appendChild(heart);
@@ -38,9 +38,8 @@
     // Remove after animation
     setTimeout(() => {
       heart.remove();
-    }, 4000); // matches the 4s animation duration
+    }, 4000); // match animation duration
   }
 
-  // Create a new heart every 300ms
   setInterval(createHeart, 300);
-  </script>
+</script>
