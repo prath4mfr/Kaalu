@@ -188,7 +188,7 @@ body.other-page {
   position: absolute;
   width: 30px;
   height: 30px;
-  background: url('heart.png') no-repeat center;
+  background: url('hearts.png') no-repeat center;
   background-size: contain;
   pointer-events: none;
   animation: floatUp 2s linear forwards;
