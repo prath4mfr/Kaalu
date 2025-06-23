@@ -21,20 +21,24 @@
     }
 
     .timeline {
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-    }
+.timeline {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #fefefe; /* solid paper white */
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  line-height: 1.6;
+}
 
-    .timeline-item {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 1s ease;
-      margin: 20px 0;
-    }
+.timeline-item {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s ease;
+  margin: 20px 0;
+  color: #333; /* warm dark text for readability */
+  font-size: 18px; /* slightly larger for clarity */
+}
 
     .timeline-item.visible {
       opacity: 1;
