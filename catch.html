@@ -22,9 +22,9 @@
       text-shadow: 2px 2px 5px black;
     }
 
-    #score {
+    #score, #timer {
       font-size: 24px;
-      margin: 20px;
+      margin: 10px;
       color: #fff;
       text-shadow: 2px 2px 5px black;
     }
@@ -35,7 +35,7 @@
       height: 100px;
       cursor: pointer;
       transition: transform 0.1s;
-      display: none; /* ✅ Hidden by default */
+      display: none;
     }
 
     #leaderboard {
@@ -84,12 +84,7 @@
       transition: background 0.3s ease;
     }
 
-    #startGame {
-      background: #00CED1;
-      color: white;
-    }
-
-    #restartGame {
+    #startGame, #restartGame {
       background: #00CED1;
       color: white;
     }
@@ -123,6 +118,7 @@
 <body>
   <h1>Catch the Character 🐾</h1>
   <div id="score">Score: 0</div>
+  <div id="timer">Time: 30</div>
   <button id="startGame">Start Game</button>
   <button id="restartGame" style="display: none;">Restart</button>
   <button id="showLeaderboard">🏆 Leaderboard</button>
@@ -140,6 +136,7 @@
   <script>
     const character = document.getElementById('character');
     const scoreDisplay = document.getElementById('score');
+    const timerDisplay = document.getElementById('timer');
     const startBtn = document.getElementById('startGame');
     const restartBtn = document.getElementById('restartGame');
     const showLeaderboardBtn = document.getElementById('showLeaderboard');
@@ -151,6 +148,8 @@
 
     let score = 0;
     let gameRunning = false;
+    let timer = 30; // ⏳ set time in seconds
+    let countdown;  // interval reference
 
     function moveCharacter() {
       const maxX = window.innerWidth - character.clientWidth;
@@ -168,23 +167,38 @@
       moveCharacter();
     });
 
-    startBtn.addEventListener('click', () => {
+    function startGame() {
       gameRunning = true;
       score = 0;
+      timer = 30; // ⏳ reset timer
       scoreDisplay.textContent = `Score: ${score}`;
+      timerDisplay.textContent = `Time: ${timer}`;
       startBtn.style.display = 'none';
       restartBtn.style.display = 'inline-block';
-      character.style.display = 'block'; // ✅ Show character
+      character.style.display = 'block';
       moveCharacter();
-    });
 
-    restartBtn.addEventListener('click', () => {
-      gameRunning = true;
-      score = 0;
-      scoreDisplay.textContent = `Score: ${score}`;
-      character.style.display = 'block'; // ✅ Show character again
-      moveCharacter();
-    });
+      clearInterval(countdown); // safety
+      countdown = setInterval(() => {
+        timer--;
+        timerDisplay.textContent = `Time: ${timer}`;
+        if (timer <= 0) {
+          stopGame();
+        }
+      }, 1000);
+    }
+
+    function stopGame() {
+      gameRunning = false;
+      clearInterval(countdown);
+      character.style.display = 'none';
+      startBtn.style.display = 'inline-block';
+      restartBtn.style.display = 'none';
+      // Player can save score now if they want!
+    }
+
+    startBtn.addEventListener('click', startGame);
+    restartBtn.addEventListener('click', startGame);
 
     function loadLeaderboard() {
       const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
@@ -207,10 +221,6 @@
       scoreDisplay.textContent = `Score: ${score}`;
       playerName.value = '';
       leaderboardDiv.style.display = 'none';
-      gameRunning = false;
-      character.style.display = 'none'; // ✅ Hide character
-      startBtn.style.display = 'inline-block';
-      restartBtn.style.display = 'none';
     });
 
     showLeaderboardBtn.addEventListener('click', () => {
