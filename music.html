@@ -25,7 +25,7 @@
       border-radius: 20px;
       text-align: center;
       box-shadow: 0 0 30px rgba(0,0,0,0.5);
-      max-width: 350px;
+      max-width: 400px;
     }
 
     .album-art {
@@ -40,6 +40,22 @@
       font-size: 20px;
       font-weight: bold;
       text-shadow: 2px 2px 8px #000;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 8px;
+      background: #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 15px 0;
+    }
+
+    .progress {
+      width: 0%;
+      height: 100%;
+      background: #ff69b4;
+      border-radius: 4px;
     }
 
     .controls {
@@ -64,19 +80,17 @@
       color: #fff;
     }
 
-    .progress-container {
-      width: 100%;
-      height: 8px;
-      background: #ddd;
-      border-radius: 4px;
-      cursor: pointer;
+    .volume-container {
+      margin: 20px 0;
     }
 
-    .progress {
-      width: 0%;
-      height: 100%;
-      background: #ff69b4;
-      border-radius: 4px;
+    .lyrics {
+      margin-top: 20px;
+      font-size: 16px;
+      line-height: 1.4;
+      text-align: left;
+      height: 120px;
+      overflow-y: auto;
     }
 
     .falling-gif {
@@ -103,7 +117,7 @@
 <body>
 
   <div class="player">
-    <h1> Now Playing </h1>
+    <h1>Now Playing</h1>
     <img id="cover" src="cover2.png" alt="Album Art" class="album-art">
     <div class="song-title" id="songTitle">sleep.mp3</div>
     <div class="progress-container" id="progressContainer">
@@ -114,6 +128,10 @@
       <button id="playPauseBtn">▶️</button>
       <button id="nextBtn">⏭️</button>
     </div>
+    <div class="volume-container">
+      Volume: <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+    </div>
+    <div class="lyrics" id="lyrics"></div>
   </div>
 
   <audio id="audio"></audio>
@@ -121,12 +139,34 @@
   <script>
     const tracks = [
       { src: 'sleep.mp3', cover: 'cover2.png', name: 'sleep.mp3' },
-      { src: 'supershy.mp3', cover: 'cover3.png', name: 'supershy.mp3' },
+      { src: 'supershy.mp3', cover: 'cover3.png', name: 'Super Shy' },
       { src: 'Mr.pratham.mp3', cover: 'cover.png', name: 'Mr.pratham.mp3' }
     ];
 
-    let currentTrack = 0;
+    const supershyLyrics = [
+      "I'm super shy, super shy",
+      "But wait a minute while I make you mine, make you mine",
+      "떨리는 지금도 you're on my mind all the time",
+      "I wanna tell you but I'm super shy, super shy",
+      "I'm super shy, super shy",
+      "But wait a minute while I make you mine, make you mine",
+      "떨리는 지금도 you're on my mind all the time",
+      "I wanna tell you but I'm super shy, super shy",
+      "And I wanna go out with you",
+      "Where you wanna go? (Huh?)",
+      "Find a lil' spot, just sit and talk",
+      "Looking pretty, follow me, 우리 둘이 나란히",
+      "너와 나 사이 사소한 것까지 다",
+      "하나부터 열까지 다 wanna know",
+      "우리들만의 비밀 암호",
+      "걱정하지 마, baby, I know",
+      "You, you, you, you make me shy but I won't lie",
+      "I got a crush on you, who knew?",
+      "날 가만히 두질 않아",
+      "You make me wanna risk it all"
+    ];
 
+    let currentTrack = 0;
     const audio = document.getElementById('audio');
     const playPauseBtn = document.getElementById('playPauseBtn');
     const prevBtn = document.getElementById('prevBtn');
@@ -135,8 +175,11 @@
     const songTitle = document.getElementById('songTitle');
     const progress = document.getElementById('progress');
     const progressContainer = document.getElementById('progressContainer');
+    const volume = document.getElementById('volume');
+    const lyricsDiv = document.getElementById('lyrics');
 
     let dropInterval = null;
+    let lyricsInterval = null;
 
     function loadTrack(index) {
       audio.src = tracks[index].src;
@@ -144,6 +187,7 @@
       songTitle.textContent = tracks[index].name;
       audio.play();
       playPauseBtn.textContent = '⏸️';
+      updateLyrics();
     }
 
     function createDrop() {
@@ -153,6 +197,23 @@
       drop.style.left = Math.random() * window.innerWidth + 'px';
       document.body.appendChild(drop);
       setTimeout(() => drop.remove(), 4000);
+    }
+
+    function updateLyrics() {
+      clearInterval(lyricsInterval);
+      lyricsDiv.innerHTML = "";
+      if (tracks[currentTrack].name === 'Super Shy') {
+        let line = 0;
+        lyricsInterval = setInterval(() => {
+          if (line < supershyLyrics.length) {
+            lyricsDiv.innerHTML += supershyLyrics[line] + '<br>';
+            lyricsDiv.scrollTop = lyricsDiv.scrollHeight;
+            line++;
+          } else {
+            clearInterval(lyricsInterval);
+          }
+        }, 2000); // shows new line every 2 sec (adjust if needed)
+      }
     }
 
     playPauseBtn.addEventListener('click', () => {
@@ -193,6 +254,10 @@
       const clickX = e.offsetX;
       const duration = audio.duration;
       audio.currentTime = (clickX / width) * duration;
+    });
+
+    volume.addEventListener('input', () => {
+      audio.volume = volume.value;
     });
 
     // Init first track
