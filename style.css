@@ -121,6 +121,11 @@ body.other-page {
   left: 25%;
 }
 
+.black-link {
+  background: black;
+  color: white;
+}
+
 /* ===== Password Box Inputs & Button ===== */
 .password-box input {
   background: #FFF8DC;
