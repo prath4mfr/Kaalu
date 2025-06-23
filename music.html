@@ -1,26 +1,59 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Music</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Music Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('gradient.avif') no-repeat center center fixed;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      cursor: url('cursor.png'), auto;
+    }
+
+    #musicControl {
+      padding: 15px 30px;
+      font-size: 20px;
+      background: pink;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: background 0.3s ease;
+    }
+
+    #musicControl:hover {
+      background: hotpink;
+      color: white;
+    }
+  </style>
 </head>
-<body class="other-page">
+<body>
+  <button id="musicControl">Play Music</button>
 
-  <div class="content-box">
-    <h1>🎵 My Music Collection 🎵</h1>
-    <div class="music-list">
-      <!-- Song -->
-      <div class="song">
-        <p>Mr. Pratham</p>
-        <audio controls>
-          <source src="Mr.pratham.wav" type="audio/wav">
-          Your browser does not support the audio element.
-        </audio>
-      </div>
-    </div>
-  </div>
+  <audio id="bgMusic" loop>
+    <source src="Mr.pratham.wav" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
 
+  <script>
+    const music = document.getElementById('bgMusic');
+    const control = document.getElementById('musicControl');
+
+    control.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        control.textContent = 'Pause Music';
+      } else {
+        music.pause();
+        control.textContent = 'Play Music';
+      }
+    });
+  </script>
 </body>
 </html>
