@@ -7,7 +7,7 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  position: relative; /* Needed for absolute links */
+  position: relative;
 }
 
 /* ===== Backgrounds ===== */
@@ -56,7 +56,7 @@ body.other-page {
 .menu h1 {
   font-family: 'Dancing Script', cursive;
   font-size: 60px;
-  color: darkred; /* Dark red as you requested */
+  color: darkred;
   margin-bottom: 20px;
 }
 
@@ -66,36 +66,44 @@ body.other-page {
   font-size: 24px;
   font-weight: bold;
   text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* Specific link colors & positions */
+.floating-link:hover {
+  text-decoration: underline;
+  transform: scale(1.05);
+}
+
+/* Specific link colors & background colors */
 .yellow-link {
-  color: #FFD700; /* yellow */
+  color: #FFD700;
+  background: rgba(255, 215, 0, 0.3);
   top: 20%;
   left: 10%;
 }
 
 .red-link {
-  color: #FF4500; /* red */
+  color: #FF4500;
+  background: rgba(255, 69, 0, 0.3);
   top: 50%;
   right: 15%;
 }
 
 .pink-link {
-  color: #FF69B4; /* pink */
+  color: #FF69B4;
+  background: rgba(255, 105, 180, 0.3);
   bottom: 25%;
   left: 20%;
 }
 
 .green-link {
-  color: #32CD32; /* green */
+  color: #32CD32;
+  background: rgba(50, 205, 50, 0.3);
   bottom: 10%;
   right: 30%;
-}
-
-/* Hover effect for floating links */
-.floating-link:hover {
-  text-decoration: underline;
 }
 
 /* ===== Password Box Inputs & Button ===== */
