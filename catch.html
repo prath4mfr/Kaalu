@@ -34,8 +34,36 @@
       width: 100px;
       height: 100px;
       cursor: pointer;
-      transition: transform 0.2s;
+      transition: transform 0.1s;
       display: none;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    #startGame, #restartGame {
+      background: #00CED1;
+      color: white;
+    }
+
+    #showLeaderboard {
+      background: #FFD700;
+    }
+
+    #showLeaderboard:hover {
+      background: #FFC300;
+    }
+
+    #musicControl {
+      background: #DA70D6;
+      color: white;
     }
 
     #leaderboard {
@@ -74,21 +102,6 @@
       box-sizing: border-box;
     }
 
-    button {
-      padding: 10px 20px;
-      margin: 5px;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-
-    #startGame, #restartGame {
-      background: #00CED1;
-      color: white;
-    }
-
     #saveScore {
       background: #FF69B4;
       color: white;
@@ -96,14 +109,6 @@
 
     #saveScore:hover {
       background: #FF1493;
-    }
-
-    #showLeaderboard {
-      background: #FFD700;
-    }
-
-    #showLeaderboard:hover {
-      background: #FFC300;
     }
 
     #closeLeaderboard {
@@ -114,13 +119,28 @@
       background: #bbb;
     }
 
-    #musicControl {
-      background: #BA55D3;
+    /* ✅ Final score popup */
+    #finalPopup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff0f5;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      text-align: center;
+      z-index: 2000;
+    }
+
+    #finalPopup button {
+      background: #FF69B4;
       color: white;
     }
 
-    #musicControl:hover {
-      background: #9932CC;
+    #finalPopup button:hover {
+      background: #FF1493;
     }
   </style>
 </head>
@@ -143,8 +163,16 @@
     <button id="closeLeaderboard">Close</button>
   </div>
 
-  <audio id="bgMusic" src="dress.mp3" loop></audio>
+  <!-- ✅ Final score popup -->
+  <div id="finalPopup">
+    <h2>⏳ Time's up!</h2>
+    <p id="finalScore"></p>
+    <button id="closeFinalPopup">OK</button>
+  </div>
+
+  <!-- ✅ Audio elements -->
   <audio id="clickSound" src="pop.mp3"></audio>
+  <audio id="bgMusic" src="dress.mp3" loop></audio>
 
   <script>
     const character = document.getElementById('character');
@@ -158,14 +186,19 @@
     const playerName = document.getElementById('playerName');
     const scoresList = document.getElementById('scoresList');
     const leaderboardDiv = document.getElementById('leaderboard');
-    const musicControlBtn = document.getElementById('musicControl');
-    const bgMusic = document.getElementById('bgMusic');
+    const finalPopup = document.getElementById('finalPopup');
+    const finalScoreText = document.getElementById('finalScore');
+    const closeFinalPopupBtn = document.getElementById('closeFinalPopup');
+
     const clickSound = document.getElementById('clickSound');
+    const bgMusic = document.getElementById('bgMusic');
+    const musicControl = document.getElementById('musicControl');
 
     let score = 0;
     let gameRunning = false;
-    let timer = 30; 
+    let timer = 30;
     let countdown;
+    let musicPlaying = false;
 
     function moveCharacter() {
       const maxX = window.innerWidth - character.clientWidth;
@@ -180,18 +213,9 @@
       if (!gameRunning) return;
       score++;
       scoreDisplay.textContent = `Score: ${score}`;
-      clickSound.currentTime = 0;
       clickSound.play();
-      animateCharacter();
       moveCharacter();
     });
-
-    function animateCharacter() {
-      character.style.transform = 'scale(1.3)';
-      setTimeout(() => {
-        character.style.transform = 'scale(1)';
-      }, 100);
-    }
 
     function startGame() {
       gameRunning = true;
@@ -220,11 +244,18 @@
       character.style.display = 'none';
       startBtn.style.display = 'inline-block';
       restartBtn.style.display = 'none';
-      alert(`⏳ Time's up!\n🎉 Your final score: ${score}`);
+
+      // Show final popup
+      finalScoreText.textContent = `🎉 Your final score: ${score}`;
+      finalPopup.style.display = 'block';
     }
 
     startBtn.addEventListener('click', startGame);
     restartBtn.addEventListener('click', startGame);
+
+    closeFinalPopupBtn.addEventListener('click', () => {
+      finalPopup.style.display = 'none';
+    });
 
     function loadLeaderboard() {
       const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || [];
@@ -243,8 +274,6 @@
       leaderboard.push({ name, score });
       localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
       loadLeaderboard();
-      score = 0;
-      scoreDisplay.textContent = `Score: ${score}`;
       playerName.value = '';
       leaderboardDiv.style.display = 'none';
     });
@@ -258,14 +287,15 @@
       leaderboardDiv.style.display = 'none';
     });
 
-    musicControlBtn.addEventListener('click', () => {
-      if (bgMusic.paused) {
-        bgMusic.play();
-        musicControlBtn.textContent = '⏸️ Pause Music';
-      } else {
+    musicControl.addEventListener('click', () => {
+      if (musicPlaying) {
         bgMusic.pause();
-        musicControlBtn.textContent = '🔊 Play Music';
+        musicControl.textContent = '🔊 Play Music';
+      } else {
+        bgMusic.play();
+        musicControl.textContent = '⏸️ Pause Music';
       }
+      musicPlaying = !musicPlaying;
     });
 
     loadLeaderboard();
