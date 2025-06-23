@@ -89,8 +89,13 @@
       font-size: 16px;
       line-height: 1.4;
       text-align: left;
-      height: 120px;
+      height: 140px;
       overflow-y: auto;
+    }
+
+    .current-line {
+      color: #ff69b4;
+      font-weight: bold;
     }
 
     .falling-gif {
@@ -143,27 +148,28 @@
       { src: 'Mr.pratham.mp3', cover: 'cover.png', name: 'Mr.pratham.mp3' }
     ];
 
+    // Real-time timestamped lyrics for "Super Shy"
     const supershyLyrics = [
-      "I'm super shy, super shy",
-      "But wait a minute while I make you mine, make you mine",
-      "떨리는 지금도 you're on my mind all the time",
-      "I wanna tell you but I'm super shy, super shy",
-      "I'm super shy, super shy",
-      "But wait a minute while I make you mine, make you mine",
-      "떨리는 지금도 you're on my mind all the time",
-      "I wanna tell you but I'm super shy, super shy",
-      "And I wanna go out with you",
-      "Where you wanna go? (Huh?)",
-      "Find a lil' spot, just sit and talk",
-      "Looking pretty, follow me, 우리 둘이 나란히",
-      "너와 나 사이 사소한 것까지 다",
-      "하나부터 열까지 다 wanna know",
-      "우리들만의 비밀 암호",
-      "걱정하지 마, baby, I know",
-      "You, you, you, you make me shy but I won't lie",
-      "I got a crush on you, who knew?",
-      "날 가만히 두질 않아",
-      "You make me wanna risk it all"
+      { time: 0, line: "I'm super shy, super shy" },
+      { time: 4, line: "But wait a minute while I make you mine, make you mine" },
+      { time: 8, line: "떨리는 지금도 you're on my mind all the time" },
+      { time: 12, line: "I wanna tell you but I'm super shy, super shy" },
+      { time: 16, line: "I'm super shy, super shy" },
+      { time: 20, line: "But wait a minute while I make you mine, make you mine" },
+      { time: 24, line: "떨리는 지금도 you're on my mind all the time" },
+      { time: 28, line: "I wanna tell you but I'm super shy, super shy" },
+      { time: 32, line: "And I wanna go out with you" },
+      { time: 35, line: "Where you wanna go? (Huh?)" },
+      { time: 38, line: "Find a lil' spot, just sit and talk" },
+      { time: 42, line: "Looking pretty, follow me, 우리 둘이 나란히" },
+      { time: 46, line: "너와 나 사이 사소한 것까지 다" },
+      { time: 50, line: "하나부터 열까지 다 wanna know" },
+      { time: 54, line: "우리들만의 비밀 암호" },
+      { time: 58, line: "걱정하지 마, baby, I know" },
+      { time: 62, line: "You, you, you, you make me shy but I won't lie" },
+      { time: 66, line: "I got a crush on you, who knew?" },
+      { time: 70, line: "날 가만히 두질 않아" },
+      { time: 74, line: "You make me wanna risk it all" }
     ];
 
     let currentTrack = 0;
@@ -179,7 +185,6 @@
     const lyricsDiv = document.getElementById('lyrics');
 
     let dropInterval = null;
-    let lyricsInterval = null;
 
     function loadTrack(index) {
       audio.src = tracks[index].src;
@@ -187,7 +192,11 @@
       songTitle.textContent = tracks[index].name;
       audio.play();
       playPauseBtn.textContent = '⏸️';
-      updateLyrics();
+      if (tracks[index].name === 'Super Shy') {
+        lyricsDiv.innerHTML = '';
+      } else {
+        lyricsDiv.innerHTML = '';
+      }
     }
 
     function createDrop() {
@@ -197,23 +206,6 @@
       drop.style.left = Math.random() * window.innerWidth + 'px';
       document.body.appendChild(drop);
       setTimeout(() => drop.remove(), 4000);
-    }
-
-    function updateLyrics() {
-      clearInterval(lyricsInterval);
-      lyricsDiv.innerHTML = "";
-      if (tracks[currentTrack].name === 'Super Shy') {
-        let line = 0;
-        lyricsInterval = setInterval(() => {
-          if (line < supershyLyrics.length) {
-            lyricsDiv.innerHTML += supershyLyrics[line] + '<br>';
-            lyricsDiv.scrollTop = lyricsDiv.scrollHeight;
-            line++;
-          } else {
-            clearInterval(lyricsInterval);
-          }
-        }, 2000); // shows new line every 2 sec (adjust if needed)
-      }
     }
 
     playPauseBtn.addEventListener('click', () => {
@@ -247,6 +239,18 @@
     audio.addEventListener('timeupdate', () => {
       const percent = (audio.currentTime / audio.duration) * 100;
       progress.style.width = percent + '%';
+
+      if (tracks[currentTrack].name === 'Super Shy') {
+        // find current lyric line
+        const currentTime = audio.currentTime;
+        let activeLine = '';
+        for (let i = 0; i < supershyLyrics.length; i++) {
+          if (currentTime >= supershyLyrics[i].time) {
+            activeLine = supershyLyrics[i].line;
+          }
+        }
+        lyricsDiv.innerHTML = `<div class="current-line">${activeLine}</div>`;
+      }
     });
 
     progressContainer.addEventListener('click', (e) => {
@@ -260,7 +264,6 @@
       audio.volume = volume.value;
     });
 
-    // Init first track
     loadTrack(currentTrack);
     audio.pause();
     playPauseBtn.textContent = '▶️';
