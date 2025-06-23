@@ -7,10 +7,12 @@
     body {
       margin: 0;
       padding: 0;
-      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+      min-height: 100vh;
+      position: relative;
       background: url('bg.jpg') no-repeat center center fixed;
       background-size: cover;
-      font-family: 'Arial', sans-serif;
+      cursor: url('cursor.png'), auto;
       text-align: center;
     }
 
@@ -42,10 +44,13 @@
       left: 50%;
       transform: translateX(-50%);
       width: 300px;
+      max-width: 90vw;
       background: rgba(255, 255, 255, 0.95);
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      box-sizing: border-box;
+      overflow: hidden;
       z-index: 1000;
     }
 
@@ -56,6 +61,16 @@
     #leaderboard ol {
       padding-left: 20px;
       text-align: left;
+    }
+
+    #leaderboard input[type="text"] {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin: 10px 0;
+      box-sizing: border-box;
     }
 
     button {
@@ -161,6 +176,7 @@
 
     showLeaderboardBtn.addEventListener('click', () => {
       leaderboardDiv.style.display = 'block';
+      loadLeaderboard();
     });
 
     closeLeaderboardBtn.addEventListener('click', () => {
