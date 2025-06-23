@@ -1,4 +1,3 @@
-/* ===== Reset & Layout ===== */
 body {
   margin: 0;
   padding: 0;
@@ -8,6 +7,8 @@ body {
   align-items: center;
   min-height: 100vh;
   position: relative;
+
+  cursor: url('cursor.png'), auto; /* 🎯 Custom cursor for the whole site */
 }
 
 /* ===== Backgrounds ===== */
