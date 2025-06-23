@@ -114,6 +114,13 @@ body.other-page {
   left: 50%;
 }
 
+.orange-link {
+  color: #FFA500;
+  background: rgba(255, 165, 0, 0.3);
+  top: 40%;
+  left: 25%;
+}
+
 /* ===== Password Box Inputs & Button ===== */
 .password-box input {
   background: #FFF8DC;
