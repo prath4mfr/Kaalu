@@ -185,15 +185,15 @@ body.other-page {
 
 /* ===== Animated Floating Hearts ===== */
 .heart {
-  position: fixed; /* Use fixed so they float from bottom relative to viewport */
-  bottom: -40px;   /* Start just below the screen */
+  position: fixed; /* always fixed for viewport */
+  bottom: -40px;   /* just below screen bottom */
   width: 40px;
   height: 40px;
   background: url('heart2.png') no-repeat center;
   background-size: contain;
   pointer-events: none;
   animation: floatUp 4s linear forwards;
-  z-index: 1; /* So it stays behind other elements if needed */
+  z-index: 1; 
 }
 
 @keyframes floatUp {
@@ -202,11 +202,11 @@ body.other-page {
     opacity: 1;
   }
   50% {
-    transform: translateY(-50vh) scale(1.2); /* half the viewport height */
+    transform: translateY(-50vh) scale(1.3); /* slight bigger mid-way */
     opacity: 1;
   }
   100% {
-    transform: translateY(-100vh) scale(0.8); /* move up full viewport height */
+    transform: translateY(-120vh) scale(0.8); /* higher than screen top */
     opacity: 0;
   }
 }
