@@ -358,3 +358,10 @@ body.other-page,
 #leaderboard button:hover {
   background: #FF1493;
 }
+
+/* === GLOBAL CURSOR FIX === ✅ Paste at end of style.css === */
+html, body, *,
+a, button, input, textarea, select, label,
+.floating-link, .music-control, .easter-egg, .heart, .falling-gif, .content-box, .menu {
+  cursor: url('cursor.png'), auto !important;
+}
