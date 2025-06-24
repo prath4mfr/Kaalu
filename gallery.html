@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <title>Memories Flipbook</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       margin: 0;
       background: url('ground.png') no-repeat center center fixed;
       background-size: cover;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
@@ -61,14 +62,11 @@
     }
 
     .controls {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
       display: flex;
-      gap: 15px;
       flex-wrap: wrap;
       justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
       z-index: 999;
     }
 
@@ -87,38 +85,41 @@
       transform: scale(1.05);
     }
 
-    /* Swipe arrow animation */
-    .swipe-arrow {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 40px;
-      height: 40px;
-      background: url('arrow.png') no-repeat center center;
-      background-size: contain;
-      animation: bounce 1.2s infinite alternate ease-in-out;
-      z-index: 1000;
-    }
-
-    @keyframes bounce {
-      0% { transform: translate(-50%, 0); }
-      100% { transform: translate(-50%, 0) translateX(20px); }
-    }
-
-    /* Hide prev/next on mobile */
+    /* PC only: Prev & Next */
     @media (max-width: 768px) {
       .pc-only {
         display: none;
       }
+    }
+
+    /* Swipe arrow: pure CSS */
+    .swipe-arrow {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      width: 30px;
+      height: 30px;
+      border: solid white;
+      border-width: 0 4px 4px 0;
+      padding: 5px;
+      transform: translateX(-50%) rotate(45deg);
+      animation: swipe-bounce 1s infinite alternate ease-in-out;
+      z-index: 1000;
+    }
+
+    @keyframes swipe-bounce {
+      0% { transform: translate(-50%, 0) rotate(45deg); }
+      100% { transform: translate(calc(-50% + 20px), 0) rotate(45deg); }
     }
   </style>
 </head>
 <body>
   <div class="frame-container" id="frameContainer"></div>
 
+  <!-- Swipe hint -->
   <div id="swipeArrow" class="swipe-arrow"></div>
 
+  <!-- Controls: Prev/Next for PC, all buttons nicely below for all -->
   <div class="controls">
     <button id="prevBtn" class="pc-only">⟵ Back</button>
     <button id="nextBtn" class="pc-only">Next ⟶</button>
@@ -129,7 +130,7 @@
   <script>
     const frameContainer = document.getElementById('frameContainer');
     const totalPages = 20;
-    let images = [];
+    const images = [];
     let currentIndex = 0;
 
     for (let i = 1; i <= totalPages; i++) {
@@ -186,7 +187,7 @@
       }
     });
 
-    // Swipe + hide arrow
+    // Mobile swipe & hide arrow
     let touchStartX = 0;
     let touchEndX = 0;
     let swipeArrow = document.getElementById('swipeArrow');
@@ -202,12 +203,8 @@
     });
 
     function handleGesture() {
-      if (touchEndX < touchStartX - 50) {
-        next();
-      }
-      if (touchEndX > touchStartX + 50) {
-        prev();
-      }
+      if (touchEndX < touchStartX - 50) next();
+      if (touchEndX > touchStartX + 50) prev();
       if (!hasSwiped) {
         swipeArrow.style.display = 'none';
         hasSwiped = true;
