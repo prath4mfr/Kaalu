@@ -1,6 +1,6 @@
 /* ===== UNIVERSAL CURSOR ===== */
 html, body, * {
-  cursor: url('cursor.png'), auto !important;  /* ✅ forces custom cursor on ALL elements */
+  cursor: url('cursor.cur'), auto !important;  /* ✅ forces custom cursor on ALL elements */
 }
 
 /* ===== BASIC RESET & LAYOUT ===== */
@@ -363,5 +363,5 @@ body.other-page,
 html, body, *,
 a, button, input, textarea, select, label,
 .floating-link, .music-control, .easter-egg, .heart, .falling-gif, .content-box, .menu {
-  cursor: url('cursor.png'), auto !important;
+  cursor: url('cursor.cur'), auto !important;
 }
