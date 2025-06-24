@@ -87,19 +87,26 @@
       transform: scale(1.05);
     }
 
-    .swipe-hint {
+    /* Swipe arrow animation */
+    .swipe-arrow {
       position: absolute;
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(255,255,255,0.7);
-      padding: 8px 15px;
-      border-radius: 20px;
-      font-size: 14px;
+      width: 40px;
+      height: 40px;
+      background: url('arrow.png') no-repeat center center;
+      background-size: contain;
+      animation: bounce 1.2s infinite alternate ease-in-out;
       z-index: 1000;
     }
 
-    /* Hide prev/next buttons on mobile */
+    @keyframes bounce {
+      0% { transform: translate(-50%, 0); }
+      100% { transform: translate(-50%, 0) translateX(20px); }
+    }
+
+    /* Hide prev/next on mobile */
     @media (max-width: 768px) {
       .pc-only {
         display: none;
@@ -110,7 +117,7 @@
 <body>
   <div class="frame-container" id="frameContainer"></div>
 
-  <div id="swipeHint" class="swipe-hint">Swipe left or right to flip pages 👉👈</div>
+  <div id="swipeArrow" class="swipe-arrow"></div>
 
   <div class="controls">
     <button id="prevBtn" class="pc-only">⟵ Back</button>
@@ -125,7 +132,6 @@
     let images = [];
     let currentIndex = 0;
 
-    // Create images
     for (let i = 1; i <= totalPages; i++) {
       const img = document.createElement('img');
       img.src = `photo${i}.jpg`;
@@ -180,10 +186,10 @@
       }
     });
 
-    // Mobile swipe support + swipe hint
+    // Swipe + hide arrow
     let touchStartX = 0;
     let touchEndX = 0;
-    let swipeHint = document.getElementById('swipeHint');
+    let swipeArrow = document.getElementById('swipeArrow');
     let hasSwiped = false;
 
     frameContainer.addEventListener('touchstart', e => {
@@ -203,7 +209,7 @@
         prev();
       }
       if (!hasSwiped) {
-        swipeHint.style.display = 'none';
+        swipeArrow.style.display = 'none';
         hasSwiped = true;
       }
     }
