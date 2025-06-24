@@ -12,13 +12,16 @@
     }
 
     body {
-      animation: flicker 0.2s infinite alternate;
-    }
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  animation: flicker 0.1s infinite alternate;  /* ⚡️ Faster flicker */
+}
 
-    @keyframes flicker {
-      0% { background: black; }
-      100% { background: white; }
-    }
+@keyframes flicker {
+  0% { background: black; }
+  100% { background: white; }
+}
 
     iframe {
       position: absolute;
