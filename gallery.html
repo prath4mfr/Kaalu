@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Memories Flipbook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
@@ -18,7 +19,7 @@
 
     .frame-container {
       position: relative;
-      width: 80vw;
+      width: 90vw;
       max-width: 900px;
       height: 80vh;
       border-radius: 20px;
@@ -61,20 +62,22 @@
 
     .controls {
       position: absolute;
-      bottom: 30px;
+      bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 20px;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
       z-index: 999;
     }
 
     .controls button {
-      padding: 12px 25px;
-      font-size: 18px;
+      padding: 10px 20px;
+      font-size: 16px;
       border: none;
-      background: rgba(255, 255, 255, 0.7);
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
       cursor: pointer;
       transition: background 0.3s, transform 0.2s;
     }
@@ -114,30 +117,30 @@
       const currentImg = images[currentIndex];
       const nextImg = images[newIndex];
 
-      // Remove all transition classes
       images.forEach(img => img.classList.remove('exit-left', 'exit-right', 'active'));
 
-      // Add exit animation to old image
       if (direction === 'next') {
         currentImg.classList.add('exit-left');
       } else if (direction === 'prev') {
         currentImg.classList.add('exit-right');
       }
 
-      // Show new image
       nextImg.classList.add('active');
       currentIndex = newIndex;
     }
 
-    document.getElementById('nextBtn').addEventListener('click', () => {
+    function next() {
       const newIndex = (currentIndex + 1) % totalPages;
       showImage(newIndex, 'next');
-    });
+    }
 
-    document.getElementById('prevBtn').addEventListener('click', () => {
+    function prev() {
       const newIndex = (currentIndex - 1 + totalPages) % totalPages;
       showImage(newIndex, 'prev');
-    });
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', next);
+    document.getElementById('prevBtn').addEventListener('click', prev);
 
     document.getElementById('downloadBtn').addEventListener('click', () => {
       const link = document.createElement('a');
@@ -155,6 +158,28 @@
         document.exitFullscreen();
       }
     });
+
+    // Mobile swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    frameContainer.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    frameContainer.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleGesture();
+    });
+
+    function handleGesture() {
+      if (touchEndX < touchStartX - 50) {
+        next();
+      }
+      if (touchEndX > touchStartX + 50) {
+        prev();
+      }
+    }
   </script>
 </body>
 </html>
