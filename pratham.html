@@ -4,11 +4,20 @@
   <meta charset="UTF-8" />
   <title>Pratham</title>
   <style>
-    body {
+    html, body {
       margin: 0;
       padding: 0;
-      background: black;
+      height: 100%;
       overflow: hidden;
+    }
+
+    body {
+      animation: flicker 0.2s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0% { background: black; }
+      100% { background: white; }
     }
 
     iframe {
@@ -23,44 +32,23 @@
   <audio src="COMEAROUND.mp3" autoplay loop></audio>
 
   <script>
-    const videoLinks = [
-      "https://www.youtube.com/embed/vwD0ewU0uZ8?autoplay=1&loop=1&playlist=vwD0ewU0uZ8",
-      "https://www.youtube.com/embed/kBFDaYf8GpU?autoplay=1&loop=1&playlist=kBFDaYf8GpU",
-      "https://www.youtube.com/embed/-u7YErDZmxw?autoplay=1&loop=1&playlist=-u7YErDZmxw",
-      "https://www.youtube.com/embed/3V68zWvvJ6E?autoplay=1&loop=1&playlist=3V68zWvvJ6E",
-      "https://www.youtube.com/embed/OADWgHqF8sw?autoplay=1&loop=1&playlist=OADWgHqF8sw",
-      "https://www.youtube.com/embed/a1UAkV1vs4Y?autoplay=1&loop=1&playlist=a1UAkV1vs4Y",
-      "https://www.youtube.com/embed/RhN07X4hcK4?autoplay=1&loop=1&playlist=RhN07X4hcK4",
-      "https://www.youtube.com/embed/Ka1QybRGkGo?autoplay=1&loop=1&playlist=Ka1QybRGkGo",
-      "https://www.youtube.com/embed/O2jkV4BsN6U?autoplay=1&loop=1&playlist=O2jkV4BsN6U",
-      "https://www.youtube.com/embed/NiqzAybAlqM?autoplay=1&loop=1&playlist=NiqzAybAlqM",
-      "https://www.youtube.com/embed/a24EUd0zeqI?autoplay=1&loop=1&playlist=a24EUd0zeqI",
-      "https://www.youtube.com/embed/xPjq75pbewI?autoplay=1&loop=1&playlist=xPjq75pbewI",
-      "https://www.youtube.com/embed/1e0yw3kP0F4?autoplay=1&loop=1&playlist=1e0yw3kP0F4",
-      "https://www.youtube.com/embed/tyWJ5MLzT7s?autoplay=1&loop=1&playlist=tyWJ5MLzT7s",
-      "https://www.youtube.com/embed/yCCTHUW392g?autoplay=1&loop=1&playlist=yCCTHUW392g",
-      "https://www.youtube.com/embed/J_qvG5ODGHk?autoplay=1&loop=1&playlist=J_qvG5ODGHk",
-      "https://www.youtube.com/embed/TFWXqLSr4ZM?autoplay=1&loop=1&playlist=TFWXqLSr4ZM",
-      "https://www.youtube.com/embed/6tI-0LBamGg?autoplay=1&loop=1&playlist=6tI-0LBamGg",
-      "https://www.youtube.com/embed/pe62zVIc4X0?autoplay=1&loop=1&playlist=pe62zVIc4X0",
-      "https://www.youtube.com/embed/Pi-OvAfQD8M?autoplay=1&loop=1&playlist=Pi-OvAfQD8M",
-      "https://www.youtube.com/embed/M1t3tcqvu0s?autoplay=1&loop=1&playlist=M1t3tcqvu0s",
-      "https://www.youtube.com/embed/tVRTm2khwTM?autoplay=1&loop=1&playlist=tVRTm2khwTM",
-      "https://www.youtube.com/embed/_9hkXCYiEjc?autoplay=1&loop=1&playlist=_9hkXCYiEjc",
-      "https://www.youtube.com/embed/FRnWtzoVR9o?autoplay=1&loop=1&playlist=FRnWtzoVR9o",
-      "https://www.youtube.com/embed/Z73PBkRBMFA?autoplay=1&loop=1&playlist=Z73PBkRBMFA",
-      "https://www.youtube.com/embed/XxORUYxVvVg?autoplay=1&loop=1&playlist=XxORUYxVvVg",
-      "https://www.youtube.com/embed/fXF59UWr-tA?autoplay=1&loop=1&playlist=fXF59UWr-tA"
+    const videoIDs = [
+      "vwD0ewU0uZ8","kBFDaYf8GpU","-u7YErDZmxw","3V68zWvvJ6E","OADWgHqF8sw","a1UAkV1vs4Y",
+      "RhN07X4hcK4","Ka1QybRGkGo","O2jkV4BsN6U","NiqzAybAlqM","a24EUd0zeqI",
+      "xPjq75pbewI","1e0yw3kP0F4","tyWJ5MLzT7s","yCCTHUW392g","J_qvG5ODGHk",
+      "TFWXqLSr4ZM","6tI-0LBamGg","pe62zVIc4X0","Pi-OvAfQD8M","M1t3tcqvu0s",
+      "tVRTm2khwTM","_9hkXCYiEjc","FRnWtzoVR9o","Z73PBkRBMFA","XxORUYxVvVg",
+      "fXF59UWr-tA"
     ];
 
-    videoLinks.forEach((link, index) => {
+    videoIDs.forEach((id, index) => {
       setTimeout(() => {
         const iframe = document.createElement('iframe');
-        iframe.src = link;
+        iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&loop=1&playlist=${id}`;
         iframe.style.left = Math.random() * (window.innerWidth - 300) + 'px';
         iframe.style.top = Math.random() * (window.innerHeight - 180) + 'px';
         document.body.appendChild(iframe);
-      }, index * 1000); // 1 second delay between each
+      }, index * 1000);
     });
   </script>
 </body>
