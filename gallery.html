@@ -61,7 +61,6 @@
       z-index: 1;
     }
 
-    /* Arrow buttons inside frame, properly inset */
     .arrow {
       position: absolute;
       top: 50%;
@@ -93,7 +92,6 @@
       right: 20px;
     }
 
-    /* Bottom control buttons */
     .controls {
       display: flex;
       flex-wrap: wrap;
@@ -118,14 +116,12 @@
       transform: scale(1.05);
     }
 
-    /* Mobile tweaks: ensure arrows inside and smaller */
+    /* MOBILE FIXES: no overlap, arrows smaller, buttons stacked nicely */
     @media (max-width: 768px) {
       .arrow {
         width: 40px;
         height: 40px;
-        font-size: 30px;
-        left: 10px;
-        right: 10px;
+        font-size: 28px;
       }
 
       .arrow-left {
@@ -136,8 +132,17 @@
         right: 10px;
       }
 
+      .controls {
+        flex-direction: column;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
       .controls button {
-        padding: 8px 16px;
+        width: 140px;
+        margin: 5px 0;
         font-size: 14px;
       }
     }
