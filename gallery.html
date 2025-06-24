@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Memories Flipbook</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
     body {
       margin: 0;
@@ -61,6 +61,39 @@
       z-index: 1;
     }
 
+    /* Arrow buttons */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      background: rgba(255,255,255,0.5);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      z-index: 10;
+    }
+
+    .arrow:hover {
+      background: rgba(255,255,255,0.8);
+      transform: scale(1.1);
+    }
+
+    .arrow-left {
+      left: -25px;
+    }
+
+    .arrow-right {
+      right: -25px;
+    }
+
+    /* Bottom control buttons */
     .controls {
       display: flex;
       flex-wrap: wrap;
@@ -85,44 +118,25 @@
       transform: scale(1.05);
     }
 
-    /* PC only: Prev & Next */
-    @media (max-width: 768px) {
-      .pc-only {
-        display: none;
+    /* Hide old PC arrows — no longer needed */
+    .pc-only {
+      display: none;
+    }
+
+    @media (min-width: 769px) {
+      .arrow {
+        display: flex;
       }
-    }
-
-    /* Swipe arrow: pure CSS */
-    .swipe-arrow {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      width: 30px;
-      height: 30px;
-      border: solid white;
-      border-width: 0 4px 4px 0;
-      padding: 5px;
-      transform: translateX(-50%) rotate(45deg);
-      animation: swipe-bounce 1s infinite alternate ease-in-out;
-      z-index: 1000;
-    }
-
-    @keyframes swipe-bounce {
-      0% { transform: translate(-50%, 0) rotate(45deg); }
-      100% { transform: translate(calc(-50% + 20px), 0) rotate(45deg); }
     }
   </style>
 </head>
 <body>
-  <div class="frame-container" id="frameContainer"></div>
+  <div class="frame-container" id="frameContainer">
+    <button id="arrowLeft" class="arrow arrow-left">&lt;</button>
+    <button id="arrowRight" class="arrow arrow-right">&gt;</button>
+  </div>
 
-  <!-- Swipe hint -->
-  <div id="swipeArrow" class="swipe-arrow"></div>
-
-  <!-- Controls: Prev/Next for PC, all buttons nicely below for all -->
   <div class="controls">
-    <button id="prevBtn" class="pc-only">⟵ Back</button>
-    <button id="nextBtn" class="pc-only">Next ⟶</button>
     <button id="fullscreenBtn">⛶ Fullscreen</button>
     <button id="downloadBtn">⬇️ Download</button>
   </div>
@@ -167,8 +181,8 @@
       showImage(newIndex, 'prev');
     }
 
-    document.getElementById('nextBtn').addEventListener('click', next);
-    document.getElementById('prevBtn').addEventListener('click', prev);
+    document.getElementById('arrowRight').addEventListener('click', next);
+    document.getElementById('arrowLeft').addEventListener('click', prev);
 
     document.getElementById('downloadBtn').addEventListener('click', () => {
       const link = document.createElement('a');
@@ -186,30 +200,6 @@
         document.exitFullscreen();
       }
     });
-
-    // Mobile swipe & hide arrow
-    let touchStartX = 0;
-    let touchEndX = 0;
-    let swipeArrow = document.getElementById('swipeArrow');
-    let hasSwiped = false;
-
-    frameContainer.addEventListener('touchstart', e => {
-      touchStartX = e.changedTouches[0].screenX;
-    });
-
-    frameContainer.addEventListener('touchend', e => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleGesture();
-    });
-
-    function handleGesture() {
-      if (touchEndX < touchStartX - 50) next();
-      if (touchEndX > touchStartX + 50) prev();
-      if (!hasSwiped) {
-        swipeArrow.style.display = 'none';
-        hasSwiped = true;
-      }
-    }
   </script>
 </body>
 </html>
