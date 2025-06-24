@@ -86,14 +86,35 @@
       background: rgba(255, 255, 255, 1);
       transform: scale(1.05);
     }
+
+    .swipe-hint {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.7);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 14px;
+      z-index: 1000;
+    }
+
+    /* Hide prev/next buttons on mobile */
+    @media (max-width: 768px) {
+      .pc-only {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="frame-container" id="frameContainer"></div>
 
+  <div id="swipeHint" class="swipe-hint">Swipe left or right to flip pages 👉👈</div>
+
   <div class="controls">
-    <button id="prevBtn">⟵ Back</button>
-    <button id="nextBtn">Next ⟶</button>
+    <button id="prevBtn" class="pc-only">⟵ Back</button>
+    <button id="nextBtn" class="pc-only">Next ⟶</button>
     <button id="fullscreenBtn">⛶ Fullscreen</button>
     <button id="downloadBtn">⬇️ Download</button>
   </div>
@@ -159,9 +180,11 @@
       }
     });
 
-    // Mobile swipe support
+    // Mobile swipe support + swipe hint
     let touchStartX = 0;
     let touchEndX = 0;
+    let swipeHint = document.getElementById('swipeHint');
+    let hasSwiped = false;
 
     frameContainer.addEventListener('touchstart', e => {
       touchStartX = e.changedTouches[0].screenX;
@@ -178,6 +201,10 @@
       }
       if (touchEndX > touchStartX + 50) {
         prev();
+      }
+      if (!hasSwiped) {
+        swipeHint.style.display = 'none';
+        hasSwiped = true;
       }
     }
   </script>
